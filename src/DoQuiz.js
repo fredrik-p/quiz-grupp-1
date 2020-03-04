@@ -1,29 +1,28 @@
 import React from 'react'
+import { db } from './firebase/firebase'
+import DoQuizUI from './DoQuizUI'
 
 class DoQuiz extends React.Component {
-    
+    state = {
+        currentQuiz: ''
+    }
+    componentDidMount() {
+        this.getCuttentQuiz(this.props.match.params.quiz_id)
+    }
+    getCuttentQuiz = (id) => {
+        console.log(id)
+        db.collection('quizes').doc(id).get().then(doc => {
+            //clear Quizz data.
+            this.setState({
+                currentQuiz: doc.data()
+            })
+        })
+    }
+
     render() {
         return (
-            <div className="card" id="doQuiz">
-                <h1>Quizz Title!</h1>
-                <section className="questions">
-                    <h2>Qusestion 1</h2>
-                    <ul className="list-group">
-                        <li className="list-group-item">Answer 1</li>
-                        <li className="list-group-item">Answer 2</li>
-                        <li className="list-group-item active">Answer 3</li>
-                        <li className="list-group-item">Answer 4</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Qusestion 2</h2>
-                    <ul className="list-group">
-                        <li className="list-group-item">Answer 1</li>
-                        <li className="list-group-item active">Answer 2</li>
-                        <li className="list-group-item">Answer 3</li>
-                        <li className="list-group-item">Answer 4</li>
-                    </ul>
-                </section>   
+            <div>
+                {this.state.currentQuiz ? <DoQuizUI quiz={this.state.currentQuiz} /> : 'Loading'}
             </div>
         )
     }
