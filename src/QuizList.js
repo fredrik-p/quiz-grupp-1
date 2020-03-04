@@ -1,6 +1,8 @@
 import React from 'react'
 import { db } from './firebase/firebase'
 import Quiz from './Quiz'
+import DoQuiz from './DoQuiz'
+import { Route, Switch } from 'react-router-dom';
 
 class QuizList extends React.Component {
     state = {
@@ -39,11 +41,18 @@ class QuizList extends React.Component {
     
     render() {
         return (
-            <div>
-                <ul>
-                    <Quiz quizState={this.state.quizes}/>
-                </ul>
-            </div>
+            <Switch> 
+                <Route exact path="/">
+                    <div>
+                        <ul>
+                            <Quiz quizState={this.state.quizes}/>
+                        </ul>
+                    </div>
+                </Route>
+                <Route path="/quiz/:quiz_id">
+                    <DoQuiz />
+                </Route>
+            </Switch>
         )
     }
 }

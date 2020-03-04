@@ -2,3 +2,14 @@
 $body-bg: #333;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+#doQuiz {
+    margin: 0.5rem;
+    h1 {
+        text-align: center;
+    }
+
+    .questions {
+        margin-bottom: 0.5rem;
+    }
+}

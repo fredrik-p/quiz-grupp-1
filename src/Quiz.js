@@ -6,7 +6,7 @@ function Quiz(props){
     return (
         <div>
             <li>
-            <Link to={'/quiz/' + id}>{props.quizState.title}</Link>
+                <Link to={'/quiz/123'}>Quizz title</Link>
             </li>
         </div>
     )
