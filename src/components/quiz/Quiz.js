@@ -5,9 +5,12 @@ function Quiz(props) {
     const quizListItems = props.quizState.map(quiz => {
         console.log(quiz)
         return ( 
-            <li className="list-group-item list-group-item-action" key={quiz.id}>
-                <Link to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
-            </li>)
+            <div>
+                <li className="list-group" id="listStyle"  key={quiz.id}>
+                    <Link className="list-group-item list-group-item-action" key={quiz.id} to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
+                </li>
+            </div>
+            )
     })
     return (
 
