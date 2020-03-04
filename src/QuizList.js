@@ -25,9 +25,13 @@ class QuizList extends React.Component {
 
 				//add new data to quizz
 				querySnapshot.forEach(doc => {
+                    const quiz = {
+                        ...doc.data(),
+                        id: doc.id
+                    }
 					this.setState({
-						//Concat doc to array
-						quizes: [...this.state.quizes, doc.data()]
+                        //Concat doc to array
+						quizes: [...this.state.quizes, quiz]
 					}) 
 				})
 			})
