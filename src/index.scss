@@ -3,6 +3,9 @@ $body-bg: #333;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
+.container {
+    max-width: 800px;
+}
 #doQuiz {
     margin: 0.5rem;
     h1 {
@@ -13,3 +16,12 @@ $body-bg: #333;
         margin-bottom: 0.5rem;
     }
 }
+
+#quizStyle {
+    h1 {
+        color: white;
+        margin-bottom: 1.5rem;
+    }
+
+}
+
