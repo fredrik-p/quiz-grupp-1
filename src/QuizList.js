@@ -37,7 +37,7 @@ class QuizList extends React.Component {
         return (
             <div>
                 <ul>
-                    <Quiz />
+                    <Quiz quizState={this.state.quizes}/>
                 </ul>
             </div>
         )
