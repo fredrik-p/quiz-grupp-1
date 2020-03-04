@@ -1,5 +1,6 @@
 import React from 'react'
 import App from 'App'
+import { db } from './firebase/firebase'
 
 class QuizList extends React.Component {
     state = {
@@ -7,6 +8,7 @@ class QuizList extends React.Component {
     }
 
     componentDidMount() {
+
 		this.getQuizzes()
 	}
 
