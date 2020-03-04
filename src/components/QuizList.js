@@ -49,9 +49,10 @@ class QuizList extends React.Component {
                         <Quiz quizState={this.state.quizes}/>
                     </div>
                 </Route>
-                <Route path="/quiz/:quiz_id">
-                    <DoQuiz />
-                </Route>
+                <Route 
+                    path="/quiz/:quiz_id"
+                    render={(props) => <DoQuiz {...props} />}
+                 />
             </Switch>
         )
     }
