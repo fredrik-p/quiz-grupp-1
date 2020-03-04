@@ -1,6 +1,6 @@
 import React from 'react'
-import App from 'App'
 import { db } from './firebase/firebase'
+import Quiz from './Quiz'
 
 class QuizList extends React.Component {
     state = {
@@ -8,10 +8,13 @@ class QuizList extends React.Component {
     }
 
     componentDidMount() {
-
-		this.getQuizzes()
+        //update quizzes from database in real time
+        db.collection('quizes').onSnapshot(() => {
+            this.getQuizzes()
+        })
 	}
 
+    //get quizzes from db
 	getQuizzes = () => {
 		db.collection('quizes').get()
 			.then(querySnapshot => {
