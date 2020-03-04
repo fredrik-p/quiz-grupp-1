@@ -1,40 +1,12 @@
-import React from 'react';
-import { db } from './firebase/firebase'
+import { Route, BrowserRouter, Link} from 'react-router-dom';
 
-class App extends React.Component {
+function App() {
+  return (
+    <div className="App">
 
-	state = {
-		quizes: []
-	}
-	componentDidMount() {
-		this.getQuizzes()
-	}
-
-	getQuizzes = () => {
-		db.collection('quizes').get()
-			.then(querySnapshot => {
-				//clear Quizz data
-				this.setState({
-					quizes: []
-				})
-
-				//add new data to quizz
-				querySnapshot.forEach(doc => {
-					this.setState({
-						//Concat doc to array
-						quizes: [...this.state.quizes, doc.data()]
-					}) 
-				})
-			})
-	}
-
-	render() {
-		return (
-			<div className="App">
-				
-			</div>
-		);
-	}
+      
+    </div>
+  );
 }
 
 export default App;
