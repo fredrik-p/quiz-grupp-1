@@ -1,12 +1,12 @@
 import React from 'react'
-import { db } from './firebase/firebase'
-import Quiz from './Quiz'
-import DoQuiz from './DoQuiz'
+import { db } from '../firebase/firebase'
+import Quiz from './quiz/Quiz'
+import DoQuiz from './quiz/DoQuiz'
 import { Route, Switch } from 'react-router-dom';
 
 class QuizList extends React.Component {
     state = {
-		quizes: [],
+        quizes: [],
     }
 
     componentDidMount() {
@@ -14,38 +14,38 @@ class QuizList extends React.Component {
         db.collection('quizes').onSnapshot(() => {
             this.getQuizzes()
         })
-	}
+    }
 
     //get quizzes from db
-	getQuizzes = () => {
-		db.collection('quizes').get()
-			.then(querySnapshot => {
-				//clear Quizz data.
-				this.setState({
-					quizes: []
-				})
+    getQuizzes = () => {
+        db.collection('quizes').get()
+            .then(querySnapshot => {
+                //clear Quizz data.
+                this.setState({
+                    quizes: []
+                })
 
-				//add new data to quizz
-				querySnapshot.forEach(doc => {
+                //add new data to quizz
+                querySnapshot.forEach(doc => {
                     const quiz = {
                         ...doc.data(),
                         id: doc.id
                     }
-					this.setState({
+                    this.setState({
                         //Concat doc to array
-						quizes: [...this.state.quizes, quiz]
-					}) 
-				})
-			})
+                        quizes: [...this.state.quizes, quiz]
+                    })
+                })
+            })
     }
-    
+
     render() {
         return (
-            <Switch> 
+            <Switch>
                 <Route exact path="/">
                     <div>
                         <ul>
-                            <Quiz quizState={this.state.quizes}/>
+                            <Quiz quizState={this.state.quizes} />
                         </ul>
                     </div>
                 </Route>

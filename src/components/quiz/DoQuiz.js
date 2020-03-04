@@ -1,7 +1,7 @@
 import React from 'react'
 
 class DoQuiz extends React.Component {
-    
+
     render() {
         return (
             <div className="card" id="doQuiz">
@@ -23,7 +23,7 @@ class DoQuiz extends React.Component {
                         <li className="list-group-item">Answer 3</li>
                         <li className="list-group-item">Answer 4</li>
                     </ul>
-                </section>   
+                </section>
             </div>
         )
     }

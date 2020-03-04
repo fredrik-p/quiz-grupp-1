@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
-import QuizList from './QuizList'
+import QuizList from './components/QuizList'
 
 
 
