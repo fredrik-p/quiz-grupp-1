@@ -13,7 +13,7 @@ class QuizList extends React.Component {
 	getQuizzes = () => {
 		db.collection('quizes').get()
 			.then(querySnapshot => {
-				//clear Quizz data
+				//clear Quizz data.
 				this.setState({
 					quizes: []
 				})
