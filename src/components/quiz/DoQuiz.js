@@ -4,25 +4,90 @@ import DoQuizUI from './DoQuizUI'
 
 class DoQuiz extends React.Component {
     state = {
-        currentQuiz: ''
+        currentQuiz: '',
+        userChoices: ''
     }
     componentDidMount() {
-        this.getCuttentQuiz(this.props.match.params.quiz_id)
+        //get single quizz by id
+        this.getCurrentQuiz(this.props.match.params.quiz_id)
     }
-    getCuttentQuiz = (id) => {
-        console.log(id)
+    getCurrentQuiz = (id) => {
         db.collection('quizes').doc(id).get().then(doc => {
-            //clear Quizz data.
+            //Set quiz vanilla state.
             this.setState({
                 currentQuiz: doc.data()
             })
+            //set users copy of the quizz so we can compare them later
+            this.createUserCopy(doc.data())
+        })
+    }
+
+    createUserCopy = (data) =>{
+        //Remap question and save only title and add is selected key default false
+        const newUserChoices = {
+            quizTitle: data.quizTitle,
+            questions: data.questions.map(question => {
+                return {
+                    questionTitle: question.questionTitle,
+                    isMultipleQuestions: question.isMultipleQuestions,
+                    answers: question.answers.map(answer => {
+                        return {
+                            answersTitle: answer.answersTitle,
+                            selected: false
+                        }
+                    })
+                }
+            })
+        }
+        this.setState({
+            userChoices: newUserChoices
+        })
+    }
+
+    handleClick = (answerObject) => {
+        this.toggleSelected(answerObject)
+    }
+
+    toggleSelected = (answerObject) => {
+        //make copy of userChoises state
+        const newUserChoices= {...this.state.userChoices};
+        
+        const toggledUserChoices = {
+            quizTitle: newUserChoices.quizTitle,
+            questions: newUserChoices.questions.map(question => {
+                return {
+                    questionTitle: question.questionTitle,
+                    isMultipleQuestions: question.isMultipleQuestions,
+                    answers: question.answers.map(answer => {
+                        //find matching answer
+                        if(answer.answersTitle === answerObject.answersTitle) {
+                            answer.selected = !answer.selected
+                            return {
+                                answersTitle: answer.answersTitle,
+                                selected: answer.selected
+                            }
+                        }
+                        return {
+                            answersTitle: answer.answersTitle,
+                            selected: answer.selected
+                        }
+                    })
+                }
+            })
+        }
+
+        this.setState({
+            userChoices: toggledUserChoices
         })
     }
 
     render() {
         return (
             <div>
-                {this.state.currentQuiz ? <DoQuizUI quiz={this.state.currentQuiz} /> 
+                {this.state.userChoices ? <DoQuizUI 
+                    quiz={this.state.userChoices} 
+                    handleClick={this.handleClick} 
+                /> 
                 : 
                 <div className="spinner-border text-primary" role="status">
                     <span className="sr-only">Loading...</span>
