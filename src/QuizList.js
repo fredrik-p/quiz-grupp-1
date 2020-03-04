@@ -1,6 +1,8 @@
 import React from 'react'
 import { db } from './firebase/firebase'
 import Quiz from './Quiz'
+import DoQuiz from './DoQuiz'
+import { Route, Switch } from 'react-router-dom';
 
 class QuizList extends React.Component {
     state = {
@@ -25,9 +27,13 @@ class QuizList extends React.Component {
 
 				//add new data to quizz
 				querySnapshot.forEach(doc => {
+                    const quiz = {
+                        ...doc.data(),
+                        id: doc.id
+                    }
 					this.setState({
-						//Concat doc to array
-						quizes: [...this.state.quizes, doc.data()]
+                        //Concat doc to array
+						quizes: [...this.state.quizes, quiz]
 					}) 
 				})
 			})
@@ -35,11 +41,18 @@ class QuizList extends React.Component {
     
     render() {
         return (
-            <div>
-                <ul>
-                    <Quiz />
-                </ul>
-            </div>
+            <Switch> 
+                <Route exact path="/">
+                    <div>
+                        <ul>
+                            <Quiz quizState={this.state.quizes}/>
+                        </ul>
+                    </div>
+                </Route>
+                <Route path="/quiz/:quiz_id">
+                    <DoQuiz />
+                </Route>
+            </Switch>
         )
     }
 }
