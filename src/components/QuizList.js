@@ -42,17 +42,17 @@ class QuizList extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/quiz">
 
 
-                    <div> 
-                        <Quiz quizState={this.state.quizes}/>
+                    <div>
+                        <Quiz quizState={this.state.quizes} />
                     </div>
                 </Route>
-                <Route 
+                <Route
                     path="/quiz/:quiz_id"
                     render={(props) => <DoQuiz {...props} />}
-                 />
+                />
             </Switch>
         )
     }

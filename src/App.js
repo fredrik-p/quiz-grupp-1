@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import QuizList from './components/QuizList'
 import { auth, google } from './firebase/firebase'
+import LoginPage from './components/LoginPage'
 
 
 
@@ -17,22 +18,16 @@ class App extends React.Component {
 
 	componentDidMount() {
 		auth.onAuthStateChanged(user => {
-			if(user) {
+			if (user) {
 				this.setState({
-					email: user.email,
-					displayName: user.displayName
+					user: {
+						email: user.email,
+						displayName: user.displayName
+					}
 				})
 			} else {
 				this.setState({
-					/**
-					 * IMPORTANT CHANGE TO NULL WHEN LOGIN BUTTON IS DONE
-					 * IMPORTANT CHANGE TO NULL WHEN LOGIN BUTTON IS DONE
-					 * IMPORTANT CHANGE TO NULL WHEN LOGIN BUTTON IS DONE
-					 */
-					user: {
-						email: 'dummy Email',
-						displayName: 'Dummy Name'
-					}
+					user: null
 				})
 			}
 		})
@@ -45,15 +40,17 @@ class App extends React.Component {
 	}
 
 	render() {
-			return (
-				<BrowserRouter>
-					<div className="App">
-						<Switch>
-							<Route path="/" component={QuizList} />
-						</Switch>
-					</div>
-				</BrowserRouter>
-			);
+		return (
+			<BrowserRouter>
+				<div className="App">
+					<Switch>
+						<Route
+							path='/' exact render={(props) => <LoginPage {...props} login={this.login} />} />
+						<Route path="/quiz" component={QuizList} />
+					</Switch>
+				</div>
+			</BrowserRouter>
+		);
 	}
 }
 
