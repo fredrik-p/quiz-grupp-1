@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import { auth } from '../../firebase/firebase'
 
 const  Navigation = props => {
@@ -7,7 +7,7 @@ const  Navigation = props => {
     const handleSignOut = e => {
         auth.signOut()
         .then(() => {
-            console.log('Signed Out')
+        props.history.push('/')
         })
     }
     return (
@@ -21,9 +21,11 @@ const  Navigation = props => {
 
                 <div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ml-auto">
-
                         <li className="nav-item">
-                            <span className="nav-link" onClick={handleSignOut}>Logout</span>
+                        <span className="nav-link active">{props.user.displayName}</span>
+                        </li>
+                        <li className="nav-item">
+                            <span id="logoutLink" className="nav-link active" onClick={handleSignOut}>Logout</span>
                         </li>
                     </ul>
                 </div>
@@ -33,4 +35,4 @@ const  Navigation = props => {
 }
 
 
-export default Navigation
+export default withRouter(Navigation)

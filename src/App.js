@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Link, useHistory } from 'react-router-dom';
 import QuizList from './components/QuizList'
 import Navigation from './components/navigation/Navigation'
 import { auth, google } from './firebase/firebase'
@@ -47,14 +47,13 @@ class App extends React.Component {
 				<BrowserRouter>
 					<div className="App">
             <Navigation user={this.state.user} />
-              <Switch>
-                <Route path="/" component={QuizList} />
-              </Switch>
+            <Switch>
+              <Route path="/" component={QuizList} />
+            </Switch>
             </div>
           </BrowserRouter>
 			);
 	}
->>>>>>> master
 }
 
 export default App;
