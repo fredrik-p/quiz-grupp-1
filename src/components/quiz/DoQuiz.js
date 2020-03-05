@@ -21,7 +21,7 @@ class DoQuiz extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 {this.state.currentQuiz ? <DoQuizUI quiz={this.state.currentQuiz} /> 
                 : 
                 <div className="spinner-border text-primary" role="status">

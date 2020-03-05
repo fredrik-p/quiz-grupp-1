@@ -9,7 +9,7 @@ export default function DoQuizUI(props) {
             return <DoQuizListItem key={index} title={answer.answersTitle} />
         })
         return(
-            <section className="questions" key={index}>
+            <section className="container questions" key={index}>
                 <h2>{question.questionTitle}</h2>
                 <ul className="list-group">
                     {answers}
@@ -18,7 +18,7 @@ export default function DoQuizUI(props) {
         )
     })
     return (
-        <div className="card" id="doQuiz">
+        <div className="container card text-center" id="doQuiz">
             <h1>{quizTitle}</h1>
             {allQuestions}  
         </div>
