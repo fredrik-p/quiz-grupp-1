@@ -18,18 +18,19 @@ class DoQuiz extends React.Component {
                 currentQuiz: doc.data()
             })
             //set users copy of the quizz so we can compare them later
-            this.createUserCopy(doc.data())
+            this.createQuiz(doc.data())
         })
     }
 
-    createUserCopy = (data) =>{
+    createQuiz = (data) =>{
         //Remap question and save only title and add is selected key default false
-        const newUserChoices = {
+        const newCurrentQuiz = {
             quizTitle: data.quizTitle,
             questions: data.questions.map(question => {
                 return {
                     questionTitle: question.questionTitle,
                     isMultipleQuestions: question.isMultipleQuestions,
+                    points: question.points,
                     answers: question.answers.map(answer => {
                         return {
                             answersTitle: answer.answersTitle,
@@ -40,7 +41,7 @@ class DoQuiz extends React.Component {
             })
         }
         this.setState({
-            userChoices: newUserChoices
+            currentQuiz: newCurrentQuiz
         })
     }
 
@@ -50,7 +51,7 @@ class DoQuiz extends React.Component {
 
     toggleSelected = (answerObject) => {
         //make copy of userChoises state
-        const newUserChoices= {...this.state.userChoices};
+        const newUserChoices= {...this.state.currentQuiz};
         
         const toggledUserChoices = {
             quizTitle: newUserChoices.quizTitle,
@@ -58,6 +59,7 @@ class DoQuiz extends React.Component {
                 return {
                     questionTitle: question.questionTitle,
                     isMultipleQuestions: question.isMultipleQuestions,
+                    points: question.points,
                     answers: question.answers.map(answer => {
                         //find matching answer
                         if(answer.answersTitle === answerObject.answersTitle) {
@@ -77,15 +79,15 @@ class DoQuiz extends React.Component {
         }
 
         this.setState({
-            userChoices: toggledUserChoices
+            currentQuiz: toggledUserChoices
         })
     }
 
     render() {
         return (
             <div>
-                {this.state.userChoices ? <DoQuizUI 
-                    quiz={this.state.userChoices} 
+                {this.state.currentQuiz ? <DoQuizUI 
+                    quiz={this.state.currentQuiz} 
                     handleClick={this.handleClick} 
                 /> 
                 : 
