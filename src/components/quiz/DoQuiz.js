@@ -22,7 +22,7 @@ class DoQuiz extends React.Component {
         })
     }
 
-    createQuiz = (data) =>{
+    createQuiz = (data) => {
         //Remap question and save only title and add is selected key default false
         const newCurrentQuiz = {
             quizTitle: data.quizTitle,
@@ -52,8 +52,8 @@ class DoQuiz extends React.Component {
 
     toggleSelected = (answerObject) => {
         //make copy of userChoises state
-        const newUserChoices= {...this.state.currentQuiz};
-        
+        const newUserChoices = { ...this.state.currentQuiz };
+
         const toggledUserChoices = {
             quizTitle: newUserChoices.quizTitle,
             questions: newUserChoices.questions.map(question => {
@@ -63,7 +63,7 @@ class DoQuiz extends React.Component {
                     points: question.points,
                     answers: question.answers.map(answer => {
                         //find matching answer
-                        if(answer.answersTitle === answerObject.answersTitle) {
+                        if (answer.answersTitle === answerObject.answersTitle) {
                             answer.selected = !answer.selected
                             return {
                                 answersTitle: answer.answersTitle,
@@ -86,18 +86,23 @@ class DoQuiz extends React.Component {
         })
     }
 
+    sendAnswers = () => {
+        console.log(this.state.currentQuiz)
+    }
+
     render() {
         return (
 
             <div>
-                {this.state.currentQuiz ? <DoQuizUI 
-                    quiz={this.state.currentQuiz} 
-                    handleClick={this.handleClick} 
-                /> 
-                : 
-                <div className="spinner-border text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
+                {this.state.currentQuiz ? <DoQuizUI
+                    quiz={this.state.currentQuiz}
+                    handleClick={this.handleClick}
+                    sendAnswers={this.sendAnswers}
+                />
+                    :
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
                 }
             </div>
         )
