@@ -103,7 +103,8 @@ class DoQuiz extends React.Component {
             }
         })
 
-        //if 
+        //if the amount of questions with atleast ONE selected question === total amount of question
+        //calc answer
         if(selected === answers.questions.length) {
             this.calculateAnswers(answers)
             this.setState({
