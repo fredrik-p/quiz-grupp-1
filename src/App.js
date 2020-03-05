@@ -38,10 +38,10 @@ class App extends React.Component {
 	}
 
 	render() {
-<<<<<<< HEAD
 		return (
 			<BrowserRouter>
 				<div className="App">
+					<Navigation user={this.state.user} />
 					<Switch>
 						<Route
 							path='/' exact render={(props) => <LoginPage {...props} login={this.login} />} />
@@ -50,18 +50,6 @@ class App extends React.Component {
 				</div>
 			</BrowserRouter>
 		);
-=======
-			return (
-				<BrowserRouter>
-					<div className="App">
-            <Navigation user={this.state.user} />
-            <Switch>
-              <Route path="/" component={QuizList} />
-            </Switch>
-            </div>
-          </BrowserRouter>
-			);
->>>>>>> master
 	}
 }
 
