@@ -5,7 +5,7 @@ import DoQuizUI from './DoQuizUI'
 class DoQuiz extends React.Component {
     state = {
         currentQuiz: '',
-        userChoices: ''
+        errorMessage: ''
     }
     componentDidMount() {
         //get single quizz by id
@@ -87,7 +87,69 @@ class DoQuiz extends React.Component {
     }
 
     sendAnswers = () => {
-        console.log(this.state.currentQuiz)
+        this.checkAnswers(this.state.currentQuiz)
+    }
+
+    //Check if atleast one answer is selected at every question
+    checkAnswers = (answers) => {
+
+        let selected = 0
+        answers.questions.forEach(question => {
+            const selectedAnswers = question.answers.filter(answer => answer.selected === true)
+            if (!selectedAnswers.length) {
+                selected += 0;
+            } else {
+                selected += 1;
+            }
+        })
+
+        //if 
+        if(selected === answers.questions.length) {
+            this.calculateAnswers(answers)
+            this.setState({
+                errorMessage: ''
+            })
+        } else {
+            this.setState({
+                errorMessage: 'Pleas select atleast one answer on each question'
+            })
+        }
+    }
+
+    calculateAnswers = (answers) => {
+        let score = 0;
+        let totalPoints = 0;
+        answers.questions.forEach(question => {
+            const points = question.points;
+            //How many points per question (Total points / amount of questions)
+            const pointsPerAnswer = points/question.answers.length
+
+            //for storing total score of quiz
+            let sum = 0;
+            //calculate amount of right answers
+            question.answers.forEach(answer => {
+                if(answer.isTrue === answer.selected) {
+                    sum += pointsPerAnswer;
+                } else {
+                    sum -= pointsPerAnswer;
+                }
+            })
+
+            totalPoints += points;
+            score += Math.max(sum, 0)
+        })
+
+        //avrundar svaret till en decimal
+        const scoreWithOneDecimal = Math.round(score * 10) / 10
+
+        /**
+         * Return as template Literal string or as an object
+         * {
+         *      score: scoreWithOneDecimal,
+         *      totalPoints: totalPoints
+         * }
+         */
+        console.log(`You got ${scoreWithOneDecimal} / ${totalPoints} points `)
     }
 
     render() {
@@ -98,6 +160,7 @@ class DoQuiz extends React.Component {
                     quiz={this.state.currentQuiz}
                     handleClick={this.handleClick}
                     sendAnswers={this.sendAnswers}
+                    errorMessage={this.state.errorMessage}
                 />
                     :
                     <div className="spinner-border text-primary" role="status">

@@ -25,6 +25,11 @@ export default function DoQuizUI(props) {
             <h1>{quizTitle}</h1>
             {allQuestions}
             <button onClick={props.sendAnswers} className="btn btn-success w-100" id="submitAnswerButton">Submit answers</button>
+            {props.errorMessage ? 
+                    <div className="alert alert-warning">{props.errorMessage}</div>
+                :
+                    '' 
+            }
         </div>
 
     )
