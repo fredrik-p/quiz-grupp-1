@@ -1,11 +1,9 @@
 import React from 'react'
-import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Link, useHistory } from 'react-router-dom';
 import QuizList from './components/QuizList'
+import Navigation from './components/navigation/Navigation'
 import { auth, google } from './firebase/firebase'
 import LoginPage from './components/LoginPage'
-
-
-
 
 
 class App extends React.Component {
@@ -40,6 +38,7 @@ class App extends React.Component {
 	}
 
 	render() {
+<<<<<<< HEAD
 		return (
 			<BrowserRouter>
 				<div className="App">
@@ -51,6 +50,18 @@ class App extends React.Component {
 				</div>
 			</BrowserRouter>
 		);
+=======
+			return (
+				<BrowserRouter>
+					<div className="App">
+            <Navigation user={this.state.user} />
+            <Switch>
+              <Route path="/" component={QuizList} />
+            </Switch>
+            </div>
+          </BrowserRouter>
+			);
+>>>>>>> master
 	}
 }
 
