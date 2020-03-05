@@ -34,7 +34,8 @@ class DoQuiz extends React.Component {
                     answers: question.answers.map(answer => {
                         return {
                             answersTitle: answer.answersTitle,
-                            selected: false
+                            selected: false,
+                            isTrue: answer.isTrue
                         }
                     })
                 }
@@ -66,12 +67,14 @@ class DoQuiz extends React.Component {
                             answer.selected = !answer.selected
                             return {
                                 answersTitle: answer.answersTitle,
-                                selected: answer.selected
+                                selected: answer.selected,
+                                isTrue: answer.isTrue
                             }
                         }
                         return {
                             answersTitle: answer.answersTitle,
-                            selected: answer.selected
+                            selected: answer.selected,
+                            isTrue: answer.isTrue
                         }
                     })
                 }
