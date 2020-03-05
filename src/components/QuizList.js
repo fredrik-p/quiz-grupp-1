@@ -1,7 +1,7 @@
 import React from 'react'
 import { db } from '../firebase/firebase'
 import Quiz from './quiz/Quiz'
-import DoQuiz from './quiz/DoQuiz'
+import DoQuiz from './quiz/DoQuizComponents/DoQuiz'
 import { Route, Switch } from 'react-router-dom';
 
 class QuizList extends React.Component {
