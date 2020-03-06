@@ -42,7 +42,7 @@ class QuizList extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/quiz">
+                <Route exact path="/">
 
 
                     <div>
