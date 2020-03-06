@@ -42,6 +42,10 @@ class App extends React.Component {
 				<div className="App">
           			{this.state.user ? <Navigation user={this.state.user} /> : ''} 
 					<Switch>
+						<Route
+							path='/create-quiz'
+							render={(props) => <CreateQuiz {...props} /> } 
+						/>
 						{this.state.user ?
 							<Route
 								path='/'
@@ -55,10 +59,7 @@ class App extends React.Component {
 							/>
 						}
 
-						<Route
-							path='/create-quiz'
-							render={(props) => <CreateQuiz {...props} /> } 
-						/>
+						
 					</Switch>
 				</div>
 			</BrowserRouter>
