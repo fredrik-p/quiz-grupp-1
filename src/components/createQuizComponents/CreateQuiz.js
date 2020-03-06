@@ -57,6 +57,6 @@ class CreateQuiz extends React.Component {
                 </form>
         )
     }
-}
+
 
 export default CreateQuiz

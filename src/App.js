@@ -4,6 +4,7 @@ import QuizList from './components/QuizList'
 import Navigation from './components/navigation/Navigation'
 import { auth, google } from './firebase/firebase'
 import LoginPage from './components/LoginPage'
+import CreateQuiz from './components/createQuizComponents/CreateQuiz'
 
 
 class App extends React.Component {
@@ -48,10 +49,16 @@ class App extends React.Component {
 							/>
 						:
 							<Route
-								path='/'  
+								path='/'
+								exact  
 								render={(props) => <LoginPage {...props} login={this.login} />} 
 							/>
 						}
+
+						<Route
+							path='/create-quiz'
+							render={(props) => <CreateQuiz {...props} /> } 
+						/>
 					</Switch>
 				</div>
 			</BrowserRouter>
