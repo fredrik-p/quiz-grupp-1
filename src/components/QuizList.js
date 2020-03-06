@@ -46,6 +46,8 @@ class QuizList extends React.Component {
 
 
                     <div>
+                    
+                        <button className="btn btn-primary btn-lg quizBtn">Create New Quiz</button>
                         <Quiz quizState={this.state.quizes} />
                     </div>
                 </Route>
