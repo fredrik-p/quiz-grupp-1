@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import QuizList from './components/QuizList'
 import Navigation from './components/navigation/Navigation'
 import { auth, google } from './firebase/firebase'
@@ -37,24 +37,24 @@ class App extends React.Component {
 
 	render() {
 		return (
+			<BrowserRouter>
 				<div className="App">
           			{this.state.user ? <Navigation user={this.state.user} /> : ''} 
 					<Switch>
 						{this.state.user ?
 							<Route
 								path='/'
-								exact
 								render={(props) => <QuizList user={this.state.user} />}
 							/>
 						:
 							<Route
-								path='/' 
-								exact 
+								path='/'  
 								render={(props) => <LoginPage {...props} login={this.login} />} 
 							/>
 						}
 					</Switch>
 				</div>
+			</BrowserRouter>
 		);
 	}
 }
