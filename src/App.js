@@ -41,7 +41,7 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<div className="App">
-					<Navigation user={this.state.user} />
+        {this.state.user ? <Navigation user={this.state.user} /> : ''} 
 					<Switch>
 						<Route
 							path='/' exact render={(props) => <LoginPage {...props} login={this.login} />} />
