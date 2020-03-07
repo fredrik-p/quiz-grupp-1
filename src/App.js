@@ -49,7 +49,7 @@ class App extends React.Component {
 						{this.state.user ?
 							<Route
 								path='/'
-								render={(props) => <QuizList user={this.state.user} />}
+								render={(props) => <QuizList {...props} user={this.state.user} />}
 							/>
 						:
 							<Route

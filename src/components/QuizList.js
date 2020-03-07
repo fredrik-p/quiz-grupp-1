@@ -47,7 +47,7 @@ class QuizList extends React.Component {
 
                     <div>
                     
-                        <button className="btn btn-success btn-lg quizBtn">
+                        <button className="btn button btn-lg quizBtn">
                             <Link to="/create-quiz">Create New Quiz</Link>
                         </button>
                         <Quiz quizState={this.state.quizes} />
