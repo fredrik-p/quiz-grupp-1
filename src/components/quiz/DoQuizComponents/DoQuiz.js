@@ -5,7 +5,6 @@ import DoQuizUI from './DoQuizUI'
 class DoQuiz extends React.Component {
     state = {
         quiz: [],
-        errorMessage: ''
     }
     componentDidMount() {
         //get quiz title
@@ -42,7 +41,9 @@ class DoQuiz extends React.Component {
                 const question = {
                     id: doc.id,
                     ...doc.data(),
-                    answers: answersWithSelected
+                    answers: answersWithSelected,
+                    errorMessage: ''
+
                 }
                 this.setState({
                     quiz: [...this.state.quiz, question]
@@ -64,6 +65,9 @@ class DoQuiz extends React.Component {
 
         //find question with answer
         const clickedQuestion = newQuiz.find(question => question.id === questionId)
+
+        //remove Error message if there is one
+        clickedQuestion.errorMessage = '';
 
         //check if radiobutton or not
         if(clickedQuestion.isMultipleQuestions) {
@@ -87,36 +91,35 @@ class DoQuiz extends React.Component {
     }
 
     sendAnswers = () => {
-        this.checkAnswers(this.state.quiz)
+        this.checkAnswers()
     }
 
     //Check if atleast one answer is selected at every question
-    checkAnswers = (answers) => {
-        let selected = 0
+    checkAnswers = () => {
+        const answers = [...this.state.quiz]
+        //check if atleast one answer is selected
         answers.forEach(question => {
-            const selectedAnswers = question.answers.filter(answer => answer.selected === true)
-            if (!selectedAnswers.length) {
-                selected += 0;
+            const atleastOneSelectedAnswer = question.answers.find(answer => answer.selected === true);
+            if(!atleastOneSelectedAnswer) {
+                question.errorMessage = 'Pleas select atleast one answer'
             } else {
-                selected += 1;
+                question.errorMessage = ''
             }
         })
 
-        //if the amount of questions with atleast ONE selected question === total amount of question
-        //calc answer
-        if(selected === answers.length) {
-            this.calculateAnswers(answers)
+        //if no error message in questions calc answers
+        const errorMessageValue = answers.find(question => question.errorMessage !== '');
+        if(errorMessageValue) {
             this.setState({
-                errorMessage: ''
+                quiz: answers
             })
-        } else {
-            this.setState({
-                errorMessage: 'Pleas select atleast one answer on each question'
-            })
+            return;
         }
+        this.calculateAnswers()
     }
 
-    calculateAnswers = (answers) => {
+    calculateAnswers = () => {
+        const answers = this.state.quiz;
         let score = 0;
         let totalPoints = 0;
         answers.forEach(question => {
@@ -161,7 +164,7 @@ class DoQuiz extends React.Component {
                 quizQuestionLength={this.state.quiz.length}
                 handleClick={this.handleClick}
                 sendAnswers={this.sendAnswers}
-                errorMessage={this.state.errorMessage}
+                errorMessage={question.errorMessage}
             />
                 )
         }) 
