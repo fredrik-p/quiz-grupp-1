@@ -64,10 +64,22 @@ class DoQuiz extends React.Component {
 
         //find question with answer
         const clickedQuestion = newQuiz.find(question => question.id === questionId)
-        
-        //find clicked answer
-        const clickedAnswer = clickedQuestion.answers.find(answer => answer === answerObject)
-        clickedAnswer.selected = !clickedAnswer.selected
+
+        //check if radiobutton or not
+        if(clickedQuestion.isMultipleQuestions) {
+            //find clicked answer
+            const clickedAnswer = clickedQuestion.answers.find(answer => answer === answerObject)
+            clickedAnswer.selected = !clickedAnswer.selected 
+        } else {
+            //Unselect all
+            clickedQuestion.answers.forEach(answer => {
+                answer.selected = false;
+            })
+
+            //Set clicked answer to true
+            const clickedAnswer = clickedQuestion.answers.find(answer => answer === answerObject)
+            clickedAnswer.selected = true; 
+        }
         
         this.setState({
             quiz: newQuiz
