@@ -13,6 +13,8 @@ export default function DoQuizUI(props) {
         />
     })
 
+    const selectedAnswer = question.answers.find(answer => answer.selected === true)
+
     return (
         <div className="container card text-center" id="doQuiz">
             <section className="questions">
@@ -22,8 +24,17 @@ export default function DoQuizUI(props) {
                 </ul>
             </section>
 
+            {/* --- Render next button if atleast one answer is selected --- */}
+            {selectedAnswer && (quizQuestionLength - 1 !== index) ? 
+                <button className="btn button" id="nextQuestion" onClick={props.nextQuestion}>
+                    <span>Next</span>
+                </button>
+            :
+                 ''
+            }
+
             {/* --- Render submit answers button if on last question --- */}
-            {(quizQuestionLength - 1) === index ? 
+            {(quizQuestionLength - 1) === index && selectedAnswer ? 
                 <button onClick={props.sendAnswers} className="btn button w-100" id="submitAnswerButton">Submit answers</button>
             :
              ''

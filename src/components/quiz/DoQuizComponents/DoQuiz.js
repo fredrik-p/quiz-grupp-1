@@ -5,6 +5,7 @@ import DoQuizUI from './DoQuizUI'
 class DoQuiz extends React.Component {
     state = {
         quiz: [],
+        currentQuestion: 0
     }
     componentDidMount() {
         //get quiz title
@@ -118,6 +119,16 @@ class DoQuiz extends React.Component {
         this.calculateAnswers()
     }
 
+    nextQuestion = () => {
+        //return if on last question
+        if((this.state.quiz.length - 1) === this.state.currentQuestion) {
+            return;
+        }
+        this.setState({
+            currentQuestion: this.state.currentQuestion + 1
+        })
+    }
+
     calculateAnswers = () => {
         const answers = this.state.quiz;
         let score = 0;
@@ -165,6 +176,7 @@ class DoQuiz extends React.Component {
                 handleClick={this.handleClick}
                 sendAnswers={this.sendAnswers}
                 errorMessage={question.errorMessage}
+                nextQuestion={this.nextQuestion}
             />
                 )
         }) 
@@ -174,7 +186,7 @@ class DoQuiz extends React.Component {
             <div>
                 <h1>{this.state.quizTitle}</h1>
                 {this.state.quiz.length ? 
-                    allQuestions
+                    allQuestions[this.state.currentQuestion]
                     :
                     <div className="spinner-border text-primary" role="status">
                         <span className="sr-only">Loading...</span>
