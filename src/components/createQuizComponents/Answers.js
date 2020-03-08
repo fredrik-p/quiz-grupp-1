@@ -26,7 +26,7 @@ class Answers extends React.Component {
         return (
             <div>
             <label htmlFor="answerTitle">Answer</label>
-                <div className="input-group mt-1 mb-1">
+                <div className="input-group mb-1">
                 <input type="text"
                 id="answerTitle"
                 aria-label="Answer"

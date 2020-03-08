@@ -36,9 +36,9 @@ class Questions extends React.Component {
     }
     handleDeleteAnswer = (payload) => {
         const newAnswers = [...this.state.answers]
-       const filteredAnswers = newAnswers.filter(answer => answer !== payload)
+        const filteredAnswers = newAnswers.filter(answer => answer !== payload)
     
-       this.setState({
+        this.setState({
            answers: filteredAnswers,
        })
     }
@@ -103,7 +103,6 @@ class Questions extends React.Component {
                 Add answer
                 </button>
                 </div>
-
            
         )
     }
