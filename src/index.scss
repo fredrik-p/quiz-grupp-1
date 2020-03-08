@@ -4,7 +4,7 @@ $body-bg: #333;
 @import '~bootstrap/scss/bootstrap.scss';
 
 body {
-    color: green;
+    color: white;
 }
 .container {
     max-width: 800px;
@@ -31,7 +31,7 @@ body {
 #listStyle {
     a {
         text-decoration: none;
-        color: green;
+        color: black
     }
     a:hover {
         color: #333;
