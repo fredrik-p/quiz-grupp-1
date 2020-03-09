@@ -1,12 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+const styles = {
+    inputNormal:{color:'red'},
+    inputClicked:{color:'green'}
+    }
 
 class Answers extends React.Component {
-    state = {
-        answerTitle: '',
-        isTrue: false,
-    }
 
     handleInputChange = (e) => {
 		this.setState({
@@ -20,6 +21,10 @@ class Answers extends React.Component {
 
     handleAnswerChange = (e) => {
         this.props.handleAnswerChange(e.target.value, this.props.answer)
+    }
+
+    handleIsTrue = () => {
+        this.props.handleIsTrue(this.props.answer)
     }
 
     render() {
@@ -51,11 +56,10 @@ class Answers extends React.Component {
                         ''
                     }
                 </div>
-                <button type="submit" 
-                className="btn btn-success"
-                >
-                Correct?
-                </button>
+                <span id="isTrue" style={this.props.isTrue ? styles.inputClicked : styles.inputNormal} onClick={this.handleIsTrue}>{this.props.isTrue ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />}
+               
+                
+                </span>
             </div>
         )
     }

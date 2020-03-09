@@ -58,18 +58,29 @@ class Questions extends React.Component {
         })
     }
 
-    handleMultipleQuestions = () => {
-        this.setState({
-            isMultipleQuestions: true,
-        })
-    }
+    handleIsTrue = (id) => {
+        const newAnswers = [...this.state.answers]
+        const newAnswer = newAnswers.find(answer => answer === id)
+        newAnswer.isTrue = !newAnswer.isTrue
 
-    handleSingleQuestions = () => {
         this.setState({
-            isMultipleQuestions: false,
+            answers: newAnswers,
         })
 
+        const filteredAnswers = newAnswers.filter(answer => answer.isTrue === true)
+        if (filteredAnswers.length > 1) {
+            this.setState({
+                isMultipleQuestions: true
+            }) 
+        } else if (filteredAnswers.length === 1) {
+            this.setState({
+                isMultipleQuestions: false
+            }) 
+        } else {
+            return;
+        }
     }
+
     render() {
        const answers = this.state.answers.map((answer, i) => {
             return <Answers 
@@ -79,6 +90,8 @@ class Questions extends React.Component {
                     handleDeleteAnswer={this.handleDeleteAnswer}
                     handleAnswerChange={this.handleAnswerChange}
                     answerTitle={answer.answerTitle}
+                    isTrue={answer.isTrue}
+                    handleIsTrue={this.handleIsTrue}
                 />
         })
         return (
@@ -105,14 +118,12 @@ class Questions extends React.Component {
                     <div className="input-group-append">
                         <span 
                             style={this.state.isMultipleQuestions ? styles.inputNormal : styles.inputClicked}
-                            onClick={this.handleMultipleQuestions}
                             className="input-group-text">
                             <FontAwesomeIcon icon={faCheckDouble} 
                             />
                         </span>
                        <span 
-                       style={this.state.isMultipleQuestions ? styles.inputClicked : styles.inputNormal}
-                            onClick={this.handleSingleQuestions}
+                            style={this.state.isMultipleQuestions ? styles.inputClicked : styles.inputNormal}
                             className="input-group-text">
                             <FontAwesomeIcon icon={faCheck}
                             />
