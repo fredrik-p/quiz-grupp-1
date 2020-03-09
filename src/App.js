@@ -14,7 +14,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		auth.onAuthStateChanged(user => {
+		this.authLissener = auth.onAuthStateChanged(user => {
 			if (user) {
 				this.setState({
 					user: {
@@ -29,6 +29,10 @@ class App extends React.Component {
 				})
 			}
 		})
+	}
+
+	componentWillUnmount() {
+		this.authLissener.unsubscribe();
 	}
 
 	login = () => {
