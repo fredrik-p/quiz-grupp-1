@@ -21,6 +21,7 @@ $hover-color: #fff;
 
 // Basic Styles
 body {
+
     color: $font-color;
     font-family: $font;
 }
@@ -86,7 +87,9 @@ body {
 #listStyle {
     a {
         text-decoration: none;
+
         color: $font-color;
+
     }
     a:hover {
         color: $hover-color;

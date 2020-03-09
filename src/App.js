@@ -41,6 +41,7 @@ class App extends React.Component {
 			<BrowserRouter>
 				<div className="App">
 					{this.state.user ? <Navigation user={this.state.user} /> : ''}
+
 					<Switch>
 						<Route
 							path='/create-quiz'
