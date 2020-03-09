@@ -216,7 +216,7 @@ class DoQuiz extends React.Component {
         return (
 
             <div>
-                {this.props.quizCompleted ? '' : <h1>{this.state.quizTitle}</h1>}
+                {this.props.quizCompleted ? '' : <h1 className="doQuizTitle">{this.state.quizTitle}</h1>}
                 {this.state.quiz.length ? 
                     this.props.quizCompleted ?
                             <ScoreScreen points={this.state.points} completeQuiz={this.completeQuiz} history={this.props.history} />

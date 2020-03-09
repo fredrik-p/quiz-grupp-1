@@ -17,7 +17,7 @@ class QuizList extends React.Component {
     }
 
     componentWillUnmount() {
-        this.dbSnapshot.unsubscribe();
+        this.dbSnapshot();
     }
 
     //get quizzes from db
