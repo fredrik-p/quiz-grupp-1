@@ -17,10 +17,12 @@ class App extends React.Component {
 	componentDidMount() {
 		this.authLissener = auth.onAuthStateChanged(user => {
 			if (user) {
+				const endIndexOfName = user.displayName.indexOf(" ");
+				const firstName = user.displayName.slice(0, endIndexOfName);
 				this.setState({
 					user: {
 						email: user.email,
-						displayName: user.displayName
+						displayName: firstName
 					},
 					loading: false
 				})
