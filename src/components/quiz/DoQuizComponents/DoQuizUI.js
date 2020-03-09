@@ -2,31 +2,46 @@ import React from 'react'
 import DoQuizListItem from './DoQuizListItem'
 
 export default function DoQuizUI(props) {
-    const { quizTitle, questions } = props.quiz
-    const allQuestions = questions.map((question, index) => {
-        const answers = question.answers.map((answer, index) => {
-            return <DoQuizListItem
-                key={index}
-                answer={answer}
-                handleClick={props.handleClick}
-            />
-        })
-        return (
-            <section className="questions" key={index}>
+    const { question, errorMessage, quizQuestionLength, index, questionId } = props
+
+    const answers = question.answers.map((answer, index) => {
+        return <DoQuizListItem
+            key={index}
+            questionId={questionId}
+            answer={answer}
+            handleClick={props.handleClick}
+        />
+    })
+
+    const selectedAnswer = question.answers.find(answer => answer.selected === true)
+
+    return (
+        <div className="container card text-center" id="doQuiz">
+            <section className="questions">
                 <h2>{question.questionTitle}</h2>
                 <ul className="list-group">
                     {answers}
                 </ul>
             </section>
-        )
-    })
-    return (
-        <div className="container card text-center" id="doQuiz">
-            <h1>{quizTitle}</h1>
-            {allQuestions}
-            <button onClick={props.sendAnswers} className="btn btn-success w-100" id="submitAnswerButton">Submit answers</button>
-            {props.errorMessage ? 
-                    <div className="alert alert-warning">{props.errorMessage}</div>
+
+            {/* --- Render next button if atleast one answer is selected --- */}
+            {selectedAnswer && (quizQuestionLength - 1 !== index) ? 
+                <button className="btn button" id="nextQuestion" onClick={props.nextQuestion}>
+                    <span>Next</span>
+                </button>
+            :
+                 ''
+            }
+
+            {/* --- Render submit answers button if on last question --- */}
+            {(quizQuestionLength - 1) === index && selectedAnswer ? 
+                <button onClick={props.sendAnswers} className="btn button w-100" id="submitAnswerButton">Submit answers</button>
+            :
+             ''
+            }
+            {/* --- Render error message --- */}
+            {errorMessage ? 
+                    <div className="alert alert-warning">{errorMessage}</div>
                 :
                     '' 
             }

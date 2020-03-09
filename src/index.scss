@@ -1,47 +1,91 @@
 // Override default variables before the import
-$body-bg: #333;
+$body-bg: #E86767;
+$button-color: #FD8585;
+$primary: #FD8585;
+$shadow: 24%;
+$font: "Arial Black", Arial, Helvetica, sans-serif;
+$font-color: #000;
+$hover-color: #fff;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
+/**
+ * 1. Basic styles
+ * 2. Navigation Component
+ * 3. DoQuiz Component
+ * 4. Quiz Component
+ */
+
+
+// Basic Styles
 body {
-    color: white;
+
+    color: $font-color;
+    font-family: $font;
 }
 .container {
     max-width: 800px;
 }
+
+.button {
+    background-color: $button-color;
+    color: $font-color;
+    font-family: $font;
+
+    a {
+        color: $font-color;
+        font-family: $font;
+        text-decoration: none;
+    }
+}
+// ---- Navigation Component ----
+#navigation {
+    a {
+        color: $font-color;
+        &:hover {
+            color: $hover-color;
+        }
+    }
+    #logoutLink:hover {
+        color: $hover-color
+    }
+}
+
+// ---- DoQuiz Component ----
 #doQuiz {
     margin: 0.5rem;
     h1 {
         text-align: center;
     }
-
+    
     .questions {
         margin-bottom: 0.5rem;
     }
 }
 
+#submitAnswerButton {
+    margin-bottom: 0.5rem;
+}
+
+// ---- Quiz Component ----
 #quizStyle {
     h1 {
-        color: white;
+        color: $font-color;
         margin-bottom: 1.5rem;
     }
-
+    
 }
 
 #listStyle {
     a {
         text-decoration: none;
-        color: black
+
+        color: $font-color;
+
     }
     a:hover {
-        color: #333;
+        color: $hover-color;
     }
 }
 
-#logoutLink:hover {
-    color: lightgrey;
-}
 
-#submitAnswerButton {
-   margin-bottom: 0.5rem;
-}

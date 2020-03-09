@@ -4,123 +4,136 @@ import DoQuizUI from './DoQuizUI'
 
 class DoQuiz extends React.Component {
     state = {
-        currentQuiz: '',
-        errorMessage: ''
+        quiz: [],
+        currentQuestion: 0
     }
     componentDidMount() {
+        //get quiz title
+
+
         //get single quizz by id
         this.getCurrentQuiz(this.props.match.params.quiz_id)
     }
     getCurrentQuiz = (id) => {
-        db.collection('quizes').doc(id).get().then(doc => {
-            //Set quiz vanilla state.
+        db.collection('quizes').doc(id).get()
+            .then(doc => {
+                this.setState({
+                    quizTitle: doc.data().quizTitle
+                })
+            }).catch(err => {
+                console.log('Get quiz title error', err)
+            })
+        db.collection('quizes').doc(id).collection('questions')
+        .get().then(querySnapshot => {
+            
+            //resetState
             this.setState({
-                currentQuiz: doc.data()
+                quiz: []
             })
-            //set users copy of the quizz so we can compare them later
-            this.createQuiz(doc.data())
+            querySnapshot.forEach(doc => {
+                //give all answers selected property
+                const answersWithSelected = doc.data().answers.map(answer => {
+                    return {
+                        ...answer,
+                        selected: false
+                    }
+                })
+                //give all questions its documents ID and updated answers
+                const question = {
+                    id: doc.id,
+                    ...doc.data(),
+                    answers: answersWithSelected,
+                    errorMessage: ''
+
+                }
+                this.setState({
+                    quiz: [...this.state.quiz, question]
+                })
+            })
+        })
+        .catch(err => {
+            console.log('DoQuiz get error', err)
         })
     }
 
-    createQuiz = (data) => {
-        //Remap question and save only title and add is selected key default false
-        const newCurrentQuiz = {
-            quizTitle: data.quizTitle,
-            questions: data.questions.map(question => {
-                return {
-                    questionTitle: question.questionTitle,
-                    isMultipleQuestions: question.isMultipleQuestions,
-                    points: question.points,
-                    answers: question.answers.map(answer => {
-                        return {
-                            answersTitle: answer.answersTitle,
-                            selected: false,
-                            isTrue: answer.isTrue
-                        }
-                    })
-                }
-            })
-        }
-        this.setState({
-            currentQuiz: newCurrentQuiz
-        })
+    handleClick = (answerObject, id) => {
+        this.toggleSelected(answerObject, id)
     }
 
-    handleClick = (answerObject) => {
-        this.toggleSelected(answerObject)
-    }
+    toggleSelected = (answerObject, questionId) => {
+        //make copy of Quiz state
+        const newQuiz = [...this.state.quiz ];
 
-    toggleSelected = (answerObject) => {
-        //make copy of userChoises state
-        const newUserChoices = { ...this.state.currentQuiz };
+        //find question with answer
+        const clickedQuestion = newQuiz.find(question => question.id === questionId)
 
-        const toggledUserChoices = {
-            quizTitle: newUserChoices.quizTitle,
-            questions: newUserChoices.questions.map(question => {
-                return {
-                    questionTitle: question.questionTitle,
-                    isMultipleQuestions: question.isMultipleQuestions,
-                    points: question.points,
-                    answers: question.answers.map(answer => {
-                        //find matching answer
-                        if (answer.answersTitle === answerObject.answersTitle) {
-                            answer.selected = !answer.selected
-                            return {
-                                answersTitle: answer.answersTitle,
-                                selected: answer.selected,
-                                isTrue: answer.isTrue
-                            }
-                        }
-                        return {
-                            answersTitle: answer.answersTitle,
-                            selected: answer.selected,
-                            isTrue: answer.isTrue
-                        }
-                    })
-                }
+        //remove Error message if there is one
+        clickedQuestion.errorMessage = '';
+
+        //check if radiobutton or not
+        if(clickedQuestion.isMultipleQuestions) {
+            //find clicked answer
+            const clickedAnswer = clickedQuestion.answers.find(answer => answer === answerObject)
+            clickedAnswer.selected = !clickedAnswer.selected 
+        } else {
+            //Unselect all
+            clickedQuestion.answers.forEach(answer => {
+                answer.selected = false;
             })
-        }
 
+            //Set clicked answer to true
+            const clickedAnswer = clickedQuestion.answers.find(answer => answer === answerObject)
+            clickedAnswer.selected = true; 
+        }
+        
         this.setState({
-            currentQuiz: toggledUserChoices
+            quiz: newQuiz
         })
     }
 
     sendAnswers = () => {
-        this.checkAnswers(this.state.currentQuiz)
+        this.checkAnswers()
     }
 
     //Check if atleast one answer is selected at every question
-    checkAnswers = (answers) => {
-
-        let selected = 0
-        answers.questions.forEach(question => {
-            const selectedAnswers = question.answers.filter(answer => answer.selected === true)
-            if (!selectedAnswers.length) {
-                selected += 0;
+    checkAnswers = () => {
+        const answers = [...this.state.quiz]
+        //check if atleast one answer is selected
+        answers.forEach(question => {
+            const atleastOneSelectedAnswer = question.answers.find(answer => answer.selected === true);
+            if(!atleastOneSelectedAnswer) {
+                question.errorMessage = 'Pleas select atleast one answer'
             } else {
-                selected += 1;
+                question.errorMessage = ''
             }
         })
 
-        //if the amount of questions with atleast ONE selected question === total amount of question
-        //calc answer
-        if(selected === answers.questions.length) {
-            this.calculateAnswers(answers)
+        //if no error message in questions calc answers
+        const errorMessageValue = answers.find(question => question.errorMessage !== '');
+        if(errorMessageValue) {
             this.setState({
-                errorMessage: ''
+                quiz: answers
             })
-        } else {
-            this.setState({
-                errorMessage: 'Pleas select atleast one answer on each question'
-            })
+            return;
         }
+        this.calculateAnswers()
     }
 
-    calculateAnswers = (answers) => {
+    nextQuestion = () => {
+        //return if on last question
+        if((this.state.quiz.length - 1) === this.state.currentQuestion) {
+            return;
+        }
+        this.setState({
+            currentQuestion: this.state.currentQuestion + 1
+        })
+    }
+
+    calculateAnswers = () => {
+        const answers = this.state.quiz;
         let score = 0;
         let totalPoints = 0;
-        answers.questions.forEach(question => {
+        answers.forEach(question => {
             const points = question.points;
             //How many points per question (Total points / amount of questions)
             const pointsPerAnswer = points/question.answers.length
@@ -143,26 +156,37 @@ class DoQuiz extends React.Component {
         //avrundar svaret till en decimal
         const scoreWithOneDecimal = Math.round(score * 10) / 10
 
-        /**
-         * Return as template Literal string or as an object
-         * {
-         *      score: scoreWithOneDecimal,
-         *      totalPoints: totalPoints
-         * }
-         */
         console.log(`You got ${scoreWithOneDecimal} / ${totalPoints} points `)
+
+        return {
+            score: scoreWithOneDecimal,
+            totalPoints: totalPoints
+        }
     }
 
     render() {
+        const allQuestions = this.state.quiz.map((question, index) => {
+            return (
+            <DoQuizUI
+                key={index}
+                index={index}
+                question={question}
+                questionId={question.id}
+                quizQuestionLength={this.state.quiz.length}
+                handleClick={this.handleClick}
+                sendAnswers={this.sendAnswers}
+                errorMessage={question.errorMessage}
+                nextQuestion={this.nextQuestion}
+            />
+                )
+        }) 
+
         return (
 
             <div>
-                {this.state.currentQuiz ? <DoQuizUI
-                    quiz={this.state.currentQuiz}
-                    handleClick={this.handleClick}
-                    sendAnswers={this.sendAnswers}
-                    errorMessage={this.state.errorMessage}
-                />
+                <h1>{this.state.quizTitle}</h1>
+                {this.state.quiz.length ? 
+                    allQuestions[this.state.currentQuestion]
                     :
                     <div className="spinner-border text-primary" role="status">
                         <span className="sr-only">Loading...</span>

@@ -2,7 +2,7 @@ import React from 'react'
 import { db } from '../firebase/firebase'
 import Quiz from './quiz/Quiz'
 import DoQuiz from './quiz/DoQuizComponents/DoQuiz'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 class QuizList extends React.Component {
     state = {
@@ -47,7 +47,9 @@ class QuizList extends React.Component {
 
                     <div>
                     
-                        <button className="btn btn-primary btn-lg quizBtn">Create New Quiz</button>
+                        <button className="btn button btn-lg quizBtn">
+                            <Link to="/create-quiz">Create New Quiz</Link>
+                        </button>
                         <Quiz quizState={this.state.quizes} />
                     </div>
                 </Route>
