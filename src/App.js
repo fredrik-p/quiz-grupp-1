@@ -10,7 +10,8 @@ import CreateQuiz from './components/createQuizComponents/CreateQuiz'
 class App extends React.Component {
 	state = {
 		user: null,
-		quizCompleted: false
+		quizCompleted: false,
+		loading: true
 	}
 
 	componentDidMount() {
@@ -20,19 +21,21 @@ class App extends React.Component {
 					user: {
 						email: user.email,
 						displayName: user.displayName
-					}
+					},
+					loading: false
 				})
 
 			} else {
 				this.setState({
-					user: null
+					user: null,
+					loading: false
 				})
 			}
 		})
 	}
 
 	componentWillUnmount() {
-		this.authLissener.unsubscribe();
+		this.authLissener();
 	}
 
 	login = () => {

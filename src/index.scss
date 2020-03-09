@@ -69,6 +69,58 @@ body {
     
     .questions {
         margin-bottom: 0.5rem;
+
+        text-align: center;
+
+        .doQuestionTitle{
+            background-color: $button-color;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            margin: 2.5rem 1rem 0 1rem;
+            padding: 1.5rem 1rem;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+        }
+        .quizAnswers{
+            list-style: none;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+
+            &.active {
+                color: $active-color
+            }
+        }
+    }
+
+    #nextQuestion {
+        font-size: 4rem;
+        color: $active-color;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .buttonContainer {
+        display: flex;
+        margin-top: 1rem;
+        height: 60px;
+        justify-content: center;
+
+        .button {
+            justify-self: center;
+        }
+    }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
     }
 
 }
@@ -99,6 +151,11 @@ body {
         justify-content: center;
         margin-top: 1.5rem;
     }
+}
+
+.doQuizTitle {
+    text-align: center;
+    margin-top: 2.5rem;
 }
 
 #submitAnswerButton {
