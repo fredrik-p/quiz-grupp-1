@@ -33,6 +33,7 @@ class Answers extends React.Component {
                 placeholder="Type in answer"
                 className="form-control"
                 onChange={this.handleAnswerChange}
+                value={this.props.answerTitle}
                 />
                 
                 {this.props.answers.length > 2 

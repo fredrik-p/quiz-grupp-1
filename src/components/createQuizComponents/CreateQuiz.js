@@ -5,7 +5,6 @@ import Answers from './Answers'
 class CreateQuiz extends React.Component {
     state = {
         quizTitle: '',
-       
     }
     
     handleFormSubmit = (e) => {

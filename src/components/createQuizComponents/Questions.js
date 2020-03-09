@@ -60,6 +60,7 @@ class Questions extends React.Component {
                     answers={this.state.answers} 
                     handleDeleteAnswer={this.handleDeleteAnswer}
                     handleAnswerChange={this.handleAnswerChange}
+                    answerTitle={answer.answerTitle}
                 />
         })
         return (
