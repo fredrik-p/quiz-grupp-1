@@ -56,11 +56,26 @@ class Answers extends React.Component {
                         ''
                     }
                 </div>
-                <span id="isTrue" style={this.props.isTrue ? styles.inputClicked : styles.inputNormal} onClick={this.handleIsTrue}>{this.props.isTrue ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />}
-               
-                
+                <span 
+                id="isTrue" 
+                style={this.props.isTrue 
+                ? 
+                    styles.inputClicked 
+                : 
+                    styles.inputNormal
+                } 
+                onClick={this.handleIsTrue}
+                >
+                    {this.props.isTrue 
+                    ? 
+                        <FontAwesomeIcon icon={faCheck} 
+                        /> 
+                    : 
+                        <FontAwesomeIcon icon={faTimes} 
+                        />
+                    }
                 </span>
-            </div>
+                </div>
         )
     }
 }
