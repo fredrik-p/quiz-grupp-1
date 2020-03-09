@@ -1,11 +1,13 @@
 import React from 'react'
 import { db } from '../../../firebase/firebase'
 import DoQuizUI from './DoQuizUI'
+import ScoreScreen from './ScoreScreen'
 
 class DoQuiz extends React.Component {
     state = {
         quiz: [],
-        currentQuestion: 0
+        currentQuestion: 0,
+        quizCompleted: false
     }
     componentDidMount() {
         //get quiz title
@@ -156,12 +158,16 @@ class DoQuiz extends React.Component {
         //avrundar svaret till en decimal
         const scoreWithOneDecimal = Math.round(score * 10) / 10
 
-        console.log(`You got ${scoreWithOneDecimal} / ${totalPoints} points `)
+        this.setState({
+            points: {
+                score: scoreWithOneDecimal,
+                totalPoints: totalPoints
+            } 
+        })
+        this.setState({
+            quizCompleted: true
+        })
 
-        return {
-            score: scoreWithOneDecimal,
-            totalPoints: totalPoints
-        }
     }
 
     render() {
@@ -186,7 +192,10 @@ class DoQuiz extends React.Component {
             <div>
                 <h1>{this.state.quizTitle}</h1>
                 {this.state.quiz.length ? 
-                    allQuestions[this.state.currentQuestion]
+                    this.state.quizCompleted ?
+                            <ScoreScreen points={this.state.points} />
+                        :
+                            allQuestions[this.state.currentQuestion]
                     :
                     <div className="spinner-border text-primary" role="status">
                         <span className="sr-only">Loading...</span>
