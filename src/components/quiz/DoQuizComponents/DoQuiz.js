@@ -13,8 +13,29 @@ class DoQuiz extends React.Component {
 
 
         //get single quizz by id
-        this.getCurrentQuiz(this.props.match.params.quiz_id)
+        this.getCurrentQuiz(this.props.match.params.quiz_id);
     }
+
+    randomizeAnswers = () => {
+        const newQuiz = [...this.state.quiz]
+        
+        //randomize answers
+        newQuiz.forEach((question) => {
+            question.answers.sort(() => {
+                    if(Math.random() < 0.5) {
+                        return 1;
+                    } else if (Math.random() > 0.5) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                })
+            })
+        this.setState({
+            quiz: newQuiz
+        })
+    }
+    
     getCurrentQuiz = (id) => {
         db.collection('quizes').doc(id).get()
             .then(doc => {
@@ -50,6 +71,10 @@ class DoQuiz extends React.Component {
                 this.setState({
                     quiz: [...this.state.quiz, question]
                 })
+
+                //randomizeAnswers
+
+                this.randomizeAnswers()
             })
         })
         .catch(err => {
