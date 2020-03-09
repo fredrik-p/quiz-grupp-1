@@ -7,6 +7,7 @@ $button-radius: 45px;
 $font: "Arial Black", Arial, Helvetica, sans-serif;
 $font-color: #000;
 $hover-color: #fff;
+$active-color: #FFFC8D;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
@@ -74,7 +75,97 @@ body {
     
     .questions {
         margin-bottom: 0.5rem;
+
+        text-align: center;
+
+        .doQuestionTitle{
+            background-color: $button-color;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            margin: 2.5rem 1rem 0 1rem;
+            padding: 1.5rem 1rem;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+        }
+        .quizAnswers{
+            list-style: none;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+
+            &.active {
+                color: $active-color
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
+
+    #nextQuestion {
+        font-size: 4rem;
+        color: $active-color;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .buttonContainer {
+        display: flex;
+        margin-top: 1rem;
+        height: 60px;
+        justify-content: center;
+
+        .button {
+            justify-self: center;
+        }
+    }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
+    }
+
+}
+
+.scoreScreen {
+    margin: 0.5rem 2.5rem;
+
+    .scoreTitle {
+        font-size:  1.2rem;
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    .score {
+        text-align: center;
+        color: $active-color;
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+        font-size: 3.5rem;
+        text-shadow: $button-shadow;
+    }
+
+    .logo {
+        max-width: 500px;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+}
+
+.doQuizTitle {
+    text-align: center;
+    margin-top: 2.5rem;
 }
 
 #submitAnswerButton {
@@ -103,7 +194,45 @@ body {
 
 }
 
+<<<<<<< HEAD
 
+=======
+#answerTitle {
+    background-color: #FFFA8D;
+    border: none;
+}
+
+::placeholder {
+    color: $font-color !important;
+}
+
+#questionTitle {
+    background-color: #CBF2DA;
+    border: none;
+}
+
+#quizTitle {
+    background-color: #E3CAF0;
+    border: none;
+}
+
+.input-group-text {
+    background: transparent;
+    border: none;
+}
+
+#points {
+    border-radius: 0.25rem;
+}
+
+#answerTitle {
+    border-radius: 0.25rem;
+}
+
+#minusCircle {
+    color: black;
+}
+>>>>>>> master
 // ---- LoginPage Component ----
 #login {
     h1, h2 {
@@ -133,7 +262,13 @@ body {
     margin: 3em auto 1em auto;
 }
 
+<<<<<<< HEAD
 .btn.my-btn {
     width: auto;
     overflow: auto;
   }
+=======
+#isTrue {
+    box-shadow: $button-shadow;
+}
+>>>>>>> master

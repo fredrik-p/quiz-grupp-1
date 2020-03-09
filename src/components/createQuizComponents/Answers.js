@@ -1,12 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+const styles = {
+    inputNormal:{color:'#FFFA8D'},
+    inputClicked:{color:'#CBF2DA'}
+    }
 
 class Answers extends React.Component {
-    state = {
-        answerTitle: '',
-        isTrue: false,
-    }
 
     handleInputChange = (e) => {
 		this.setState({
@@ -20,6 +21,10 @@ class Answers extends React.Component {
 
     handleAnswerChange = (e) => {
         this.props.handleAnswerChange(e.target.value, this.props.answer)
+    }
+
+    handleIsTrue = () => {
+        this.props.handleIsTrue(this.props.answer)
     }
 
     render() {
@@ -39,7 +44,9 @@ class Answers extends React.Component {
                 {this.props.answers.length > 2 
                     ?
                         <div className="input-group-append">
-                            <span onClick={this.deleteAnswer} 
+                            <span 
+                                id="minusCircle"
+                                onClick={this.deleteAnswer} 
                                 className="input-group-text">
                                 <FontAwesomeIcon icon={faMinusCircle}
                                 />
@@ -49,12 +56,26 @@ class Answers extends React.Component {
                         ''
                     }
                 </div>
-                <button type="submit" 
-                className="btn btn-success"
+                <span 
+                id="isTrue" 
+                style={this.props.isTrue 
+                ? 
+                    styles.inputClicked 
+                : 
+                    styles.inputNormal
+                } 
+                onClick={this.handleIsTrue}
                 >
-                Correct?
-                </button>
-            </div>
+                    {this.props.isTrue 
+                    ? 
+                        <FontAwesomeIcon icon={faCheck} 
+                        /> 
+                    : 
+                        <FontAwesomeIcon icon={faTimes} 
+                        />
+                    }
+                </span>
+                </div>
         )
     }
 }

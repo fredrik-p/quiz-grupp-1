@@ -11,9 +11,13 @@ class QuizList extends React.Component {
 
     componentDidMount() {
         //update quizzes from database in real time
-        db.collection('quizes').onSnapshot(() => {
+        this.dbSnapshot = db.collection('quizes').onSnapshot(() => {
             this.getQuizzes()
         })
+    }
+
+    componentWillUnmount() {
+        this.dbSnapshot();
     }
 
     //get quizzes from db
@@ -55,7 +59,7 @@ class QuizList extends React.Component {
                 </Route>
                 <Route
                     path="/quiz/:quiz_id"
-                    render={(props) => <DoQuiz {...props} />}
+                    render={(props) => <DoQuiz {...props} quizCompleted={this.props.quizCompleted} toggleCompleteQuiz={this.props.toggleCompleteQuiz} />}
                 />
             </Switch>
         )
