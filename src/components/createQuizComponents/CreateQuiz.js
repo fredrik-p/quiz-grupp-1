@@ -1,22 +1,12 @@
 import React from 'react'
+import Questions from './Questions'
+import Answers from './Answers'
 
 class CreateQuiz extends React.Component {
     state = {
         quizTitle: '',
-        questions: [
-            {
-                questionTitle: '',
-                points: 0,
-                isMultipleQuestions: false,
-                answers: [
-                    {
-                        answerTitle: '',
-                        isTrue: false,
-                    }
-                ]
-            }
-        ]
     }
+    
     handleFormSubmit = (e) => {
 		e.preventDefault();
 
@@ -31,10 +21,11 @@ class CreateQuiz extends React.Component {
     render() {
 
         return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div className="container" className="form-group">
+            <form onSubmit={this.handleFormSubmit} className="container">
+                <div className="form-group">
                     <h1>Create Quiz</h1>
-                    
+
+                        <label htmlFor="quizTitle">Quiz Title</label>
                         <input type="text"
 						id="quizTitle"
 						aria-label="Title of new quiz"
@@ -43,18 +34,11 @@ class CreateQuiz extends React.Component {
 						onChange={this.handleInputChange}
 						value={this.state.quizTitle}/>
 
-                        <input type="text"
-						id="userQuestions"
-						aria-label="Question"
-						placeholder="Type in your question"
-						className="form-control"
-						onChange={this.handleInputChange}
-						value={this.state.question}/>
-
-                        
-
                     </div>
+                    <Questions />
+                
                 </form>
+
         )
     }
 }

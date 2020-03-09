@@ -40,26 +40,27 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<div className="App">
-          			{this.state.user ? <Navigation user={this.state.user} /> : ''} 
+					{this.state.user ? <Navigation user={this.state.user} /> : ''}
+
 					<Switch>
 						<Route
 							path='/create-quiz'
-							render={(props) => <CreateQuiz {...props} /> } 
+							render={(props) => <CreateQuiz {...props} />}
 						/>
 						{this.state.user ?
 							<Route
 								path='/'
 								render={(props) => <QuizList {...props} user={this.state.user} />}
 							/>
-						:
+							:
 							<Route
 								path='/'
-								exact  
-								render={(props) => <LoginPage {...props} login={this.login} />} 
+								exact
+								render={(props) => <LoginPage {...props} login={this.login} />}
 							/>
 						}
 
-						
+
 					</Switch>
 				</div>
 			</BrowserRouter>
