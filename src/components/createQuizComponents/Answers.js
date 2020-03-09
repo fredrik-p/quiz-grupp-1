@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const styles = {
-    inputNormal:{color:'red'},
-    inputClicked:{color:'green'}
+    inputNormal:{color:'#FFFA8D'},
+    inputClicked:{color:'#CBF2DA'}
     }
 
 class Answers extends React.Component {
