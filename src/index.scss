@@ -91,6 +91,10 @@ body {
             &.active {
                 color: $active-color
             }
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
