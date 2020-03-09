@@ -88,4 +88,38 @@ body {
     }
 }
 
+#answerTitle {
+    background-color: #FFFA8D;
+    border: none;
+}
 
+::placeholder {
+    color: $font-color !important;
+}
+
+#questionTitle {
+    background-color: #CBF2DA;
+    border: none;
+}
+
+#quizTitle {
+    background-color: #E3CAF0;
+    border: none;
+}
+
+.input-group-text {
+    background: transparent;
+    border: none;
+}
+
+#points {
+    border-radius: 0.25rem;
+}
+
+#answerTitle {
+    border-radius: 0.25rem;
+}
+
+#minusCircle {
+    color: black;
+}

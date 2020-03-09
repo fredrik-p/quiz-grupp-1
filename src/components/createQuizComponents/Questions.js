@@ -3,6 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons'
 import Answers from './Answers'
 
+const styles = {
+    inputNormal:{color:'black'},
+    inputClicked:{color:'lightGrey'}
+    }
+
 class Questions extends React.Component {
     state = {
         questionTitle: '',
@@ -52,6 +57,19 @@ class Questions extends React.Component {
             answers: newAnswers,
         })
     }
+
+    handleMultipleQuestions = () => {
+        this.setState({
+            isMultipleQuestions: true,
+        })
+    }
+
+    handleSingleQuestions = () => {
+        this.setState({
+            isMultipleQuestions: false,
+        })
+
+    }
     render() {
        const answers = this.state.answers.map((answer, i) => {
             return <Answers 
@@ -86,13 +104,17 @@ class Questions extends React.Component {
                     />
                     <div className="input-group-append">
                         <span 
-                            className="input-group-text">
-                            <FontAwesomeIcon icon={faCheck}
-                            />
-                        </span>
-                        <span 
+                            style={this.state.isMultipleQuestions ? styles.inputNormal : styles.inputClicked}
+                            onClick={this.handleMultipleQuestions}
                             className="input-group-text">
                             <FontAwesomeIcon icon={faCheckDouble} 
+                            />
+                        </span>
+                       <span 
+                       style={this.state.isMultipleQuestions ? styles.inputClicked : styles.inputNormal}
+                            onClick={this.handleSingleQuestions}
+                            className="input-group-text">
+                            <FontAwesomeIcon icon={faCheck}
                             />
                         </span>
                         </div>

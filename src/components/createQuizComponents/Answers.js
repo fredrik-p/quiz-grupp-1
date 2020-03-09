@@ -39,7 +39,9 @@ class Answers extends React.Component {
                 {this.props.answers.length > 2 
                     ?
                         <div className="input-group-append">
-                            <span onClick={this.deleteAnswer} 
+                            <span 
+                                id="minusCircle"
+                                onClick={this.deleteAnswer} 
                                 className="input-group-text">
                                 <FontAwesomeIcon icon={faMinusCircle}
                                 />
