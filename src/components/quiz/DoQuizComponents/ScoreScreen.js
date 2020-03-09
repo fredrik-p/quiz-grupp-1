@@ -9,7 +9,9 @@ const ScoreScreen = (props) => {
     }
     return (
         <div className="scoreScreen">
-            <img src={logo} alt="Quiz Logo" />
+            <div>
+                <img src={logo} alt="Quiz Logo" className="logo" />
+            </div>
             <h1 className="scoreTitle">YOUR FINAL SCORE IS</h1>
             <p className="score">
                 {props.points.score}/{props.points.totalPoints}

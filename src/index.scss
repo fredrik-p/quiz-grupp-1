@@ -91,6 +91,9 @@ body {
         text-shadow: $button-shadow;
     }
 
+    .logo {
+        max-width: 500px;
+    }
     div {
         display: flex;
         justify-content: center;
