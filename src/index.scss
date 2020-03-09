@@ -37,6 +37,7 @@ body {
     box-shadow: $button-shadow;
     
     
+    
 
     a {
         color: $font-color;
@@ -44,6 +45,11 @@ body {
         text-decoration: none;
     }
 }
+
+.button:hover {
+    background-color: #FFA3A3;
+    transform: translateY(-7px);
+  }
 
 
 // ---- Navigation Component ----
@@ -94,7 +100,9 @@ body {
     a:hover {
         color: $hover-color;
     }
+
 }
+
 
 // ---- LoginPage Component ----
 #login {
@@ -111,9 +119,11 @@ body {
     margin-bottom: 2em;
 }
 
-#google {
-    background-image: (-120deg, #4285f4, #34a853, #fbbc05, #ea4335);
-    margin-right: 0.7em;
+.google {
+    width: 14%;
+    height: auto;
+    margin-right: 0.6em;
+    
 }
 
 .qg1-logo {
@@ -123,3 +133,7 @@ body {
     margin: 3em auto 1em auto;
 }
 
+.btn.my-btn {
+    width: auto;
+    overflow: auto;
+  }

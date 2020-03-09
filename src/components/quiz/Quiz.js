@@ -5,7 +5,7 @@ function Quiz(props) {
     const quizListItems = props.quizState.map(quiz => {
         return (
             <li className="list-group" id="listStyle" key={quiz.id}>
-                <Link className="list-group-item list-group-item-action" key={quiz.id} to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
+                <Link key={quiz.id} to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
             </li>
         )
     })
