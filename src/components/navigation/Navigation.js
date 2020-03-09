@@ -12,7 +12,11 @@ const Navigation = props => {
     }
     return (
         <nav id="navigation" className="navbar navbar-expand navbar-trans navbar-inverse">
-            <Link to="/" className="navbar-brand">Quiz</Link>
+            {props.quizCompleted ? 
+                ''
+            :
+                <Link to="/" className="navbar-brand">Quiz</Link>
+            }
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">

@@ -7,7 +7,6 @@ class DoQuiz extends React.Component {
     state = {
         quiz: [],
         currentQuestion: 0,
-        quizCompleted: false
     }
     componentDidMount() {
         //get quiz title
@@ -164,12 +163,14 @@ class DoQuiz extends React.Component {
                 totalPoints: totalPoints
             } 
         })
-        this.setState({
-            quizCompleted: true
-        })
+
+        this.completeQuiz()
 
     }
 
+    completeQuiz = () => {
+        this.props.toggleCompleteQuiz()
+    }
     render() {
         const allQuestions = this.state.quiz.map((question, index) => {
             return (
@@ -190,10 +191,10 @@ class DoQuiz extends React.Component {
         return (
 
             <div>
-                <h1>{this.state.quizTitle}</h1>
+                {this.props.quizCompleted ? '' : <h1>{this.state.quizTitle}</h1>}
                 {this.state.quiz.length ? 
-                    this.state.quizCompleted ?
-                            <ScoreScreen points={this.state.points} />
+                    this.props.quizCompleted ?
+                            <ScoreScreen points={this.state.points} completeQuiz={this.completeQuiz} history={this.props.history} />
                         :
                             allQuestions[this.state.currentQuestion]
                     :

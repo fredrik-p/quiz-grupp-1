@@ -7,6 +7,7 @@ $button-radius: 45px;
 $font: "Arial Black", Arial, Helvetica, sans-serif;
 $font-color: #000;
 $hover-color: #fff;
+$active-color: #FFFC8D;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
@@ -68,6 +69,32 @@ body {
     
     .questions {
         margin-bottom: 0.5rem;
+    }
+
+}
+
+.scoreScreen {
+    margin: 0.5rem 2.5rem;
+
+    .scoreTitle {
+        font-size:  1.2rem;
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    .score {
+        text-align: center;
+        color: $active-color;
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+        font-size: 3.5rem;
+        text-shadow: $button-shadow;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
     }
 }
 

@@ -55,7 +55,7 @@ class QuizList extends React.Component {
                 </Route>
                 <Route
                     path="/quiz/:quiz_id"
-                    render={(props) => <DoQuiz {...props} />}
+                    render={(props) => <DoQuiz {...props} quizCompleted={this.props.quizCompleted} toggleCompleteQuiz={this.props.toggleCompleteQuiz} />}
                 />
             </Switch>
         )

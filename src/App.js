@@ -9,7 +9,8 @@ import CreateQuiz from './components/createQuizComponents/CreateQuiz'
 
 class App extends React.Component {
 	state = {
-		user: null
+		user: null,
+		quizCompleted: false
 	}
 
 	componentDidMount() {
@@ -36,11 +37,19 @@ class App extends React.Component {
 		})
 	}
 
+	toggleCompleteQuiz = () => {
+		let toggledCompleted = this.state.quizCompleted
+		toggledCompleted = !toggledCompleted
+		this.setState({
+			quizCompleted: toggledCompleted
+		})
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
 				<div className="App">
-					{this.state.user ? <Navigation user={this.state.user} /> : ''}
+					{this.state.user ? <Navigation user={this.state.user} quizCompleted={this.state.quizCompleted} /> : ''}
 
 					<Switch>
 						<Route
@@ -50,7 +59,7 @@ class App extends React.Component {
 						{this.state.user ?
 							<Route
 								path='/'
-								render={(props) => <QuizList {...props} user={this.state.user} />}
+								render={(props) => <QuizList {...props} user={this.state.user} quizCompleted={this.state.quizCompleted} toggleCompleteQuiz={this.toggleCompleteQuiz} />}
 							/>
 							:
 							<Route
