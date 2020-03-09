@@ -11,9 +11,13 @@ class QuizList extends React.Component {
 
     componentDidMount() {
         //update quizzes from database in real time
-        db.collection('quizes').onSnapshot(() => {
+        this.dbSnapshot = db.collection('quizes').onSnapshot(() => {
             this.getQuizzes()
         })
+    }
+
+    componentWillUnmount() {
+        this.dbSnapshot.unsubscribe();
     }
 
     //get quizzes from db
