@@ -66,6 +66,8 @@ class CreateQuiz extends React.Component {
                 questions: newQuestions
             }
        })
+
+       this.handleIsMultipleQuestions(payloadQuestion);
     }
 
     handleAnswerChange = (value, payload, payloadQuestion) => {
@@ -85,6 +87,7 @@ class CreateQuiz extends React.Component {
     handleFormSubmit = (e) => {
 		e.preventDefault();
 
+        this.uploadQuiz();
     }
     
 	handleQuizTitleChange = (e) => {
@@ -167,12 +170,15 @@ class CreateQuiz extends React.Component {
     uploadQuiz = () => {
         const { quizTitle, questions } = this.state.quiz
         //Add quiz title to a new doc in quizes collection
+        console.log('submit')
         db.collection('quizes').add({
             quizTitle: quizTitle
         })
             .then((docRef) => {
                 questions.forEach(question => {
                     //add new documents to docId's subcollection for each question with answers
+                    console.log('sent Question')
+                    console.log(docRef.id)
                     db.collection('quizes').doc(docRef.id).collection('questions').add({
                         questionTitle: question.questionTitle,
                         points: question.points,
@@ -181,6 +187,8 @@ class CreateQuiz extends React.Component {
                         
                     })
                 })
+
+                console.log('Done')
             }).catch( err => {
                 console.log('Add quiz error', err)
             })
@@ -206,9 +214,11 @@ class CreateQuiz extends React.Component {
 
         return (
             <form onSubmit={this.handleFormSubmit} className="container">
+                <button className="btn button btn-lg" type="submit" >
+                    I'M DONE!
+                </button>
                 <div className="form-group">
                     <h1>Create Quiz</h1>
-
                         <label htmlFor="quizTitle">Quiz Title</label>
                         <input type="text"
 						id="quizTitle"
@@ -233,11 +243,7 @@ class CreateQuiz extends React.Component {
                     </span>
                     </div>
 
-                    {allQuestions}
-
-                    
-
-                   
+                    {allQuestions} 
                 </form>
 
         )

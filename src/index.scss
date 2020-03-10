@@ -210,7 +210,7 @@ body {
 }
 
 ::placeholder {
-    color: $font-color !important;
+    color: gray !important;
 }
 
 #questionTitle {
@@ -237,7 +237,7 @@ body {
 }
 
 #minusCircle {
-    color: black;
+    color: #FFFA8D;
 }
 
 #isTrue {
@@ -287,9 +287,24 @@ body {
 }
 
 #addQuestionIcon {
-    color: white;
+    color :#E3CAF0;
 }
 
 #addQuestionIcon:hover {
     cursor: pointer;
+    color: $hover-color;
+}
+
+#addAnswerIcon {
+    color: #FFFA8D;
+    margin-right: 0.8rem;
+}
+
+#addAnswerIcon:hover {
+    cursor: pointer;
+    color: $hover-color;
+}
+
+#addAnswer {
+    line-height: 4rem;
 }
