@@ -36,10 +36,9 @@ body {
     font-family: $font;
     border-radius: $button-radius;
     box-shadow: $button-shadow;
+    border: none;
     
     
-    
-
     a {
         color: $font-color;
         font-family: $font;
@@ -265,6 +264,15 @@ body {
     height: auto;
     display: block;
     margin: 3em auto 1em auto;
+}
+
+.google-btn {
+    width: 100%;
+    max-width: 295px;
+    padding: 0.5rem 1rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5;
 }
 
 #isTrue {

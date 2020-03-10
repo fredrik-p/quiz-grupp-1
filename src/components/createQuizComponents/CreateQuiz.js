@@ -1,6 +1,7 @@
 import React from 'react'
 import Questions from './Questions'
 import Answers from './Answers'
+import { db } from '../../firebase/firebase'
 
 class CreateQuiz extends React.Component {
     state = {
@@ -89,6 +90,26 @@ class CreateQuiz extends React.Component {
         })
     }
     
+    uploadQuiz = () => {
+        const { quizTitle, questions } = this.state.quiz
+        db.collection('quizes').add({
+            quizTitle: quizTitle
+        })
+            .then((docRef) => {
+                questions.forEach(question => {
+                    db.collection('quizes').doc(docRef.id).collection('questions').add({
+                        questionTitle: question.questionTitle,
+                        points: question.points,
+                        isMultipleQuestions: question.isMultipleQuestions,
+                        answers: [...question.answers]
+                        
+                    })
+                })
+            }).catch( err => {
+                console.log('Add quiz error', err)
+            })
+    }
+
     render() {
         const allQuestions = this.state.quiz.questions.map((question, i) => {
             return  <Questions 

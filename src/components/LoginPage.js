@@ -11,7 +11,7 @@ const LoginPage = (props) => {
                 src={logo}
                 alt="Logo" />
             <h1>SIGN IN TO CREATE & PLAY QUIZES</h1>
-            <button onClick={props.login} className="btn button btn-lg">
+            <button onClick={props.login} className="button google-btn">
                 <img className="google"
                     src={google}
                     alt="Google logo" />Sign in with Google </button>
