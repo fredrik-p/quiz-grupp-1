@@ -50,10 +50,13 @@ class QuizList extends React.Component {
 
 
                     <div className="container mt-4 text-center">
-
-                        <button className="btn button btn-lg quizBtn">
-                            <Link to="/create-quiz">Create New Quiz</Link>
-                        </button>
+                        {this.props.user.displayName === 'Guest' ?
+                            ''
+                            :
+                            <button className="btn button btn-lg quizBtn">
+                                <Link to="/create-quiz">Create New Quiz</Link>
+                            </button>
+                        }
                         <Quiz quizState={this.state.quizes} />
                     </div>
                 </Route>
