@@ -12,21 +12,26 @@ const Navigation = props => {
     }
     return (
         <nav id="navigation" className="navbar navbar-expand navbar-trans navbar-inverse">
-            {props.quizCompleted ? 
+            {props.quizCompleted ?
                 ''
-            :
+                :
                 <Link to="/" className="navbar-brand">Quiz</Link>
             }
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <span className="nav-link active">{props.user.displayName}</span>
-                        </li>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <span className="nav-link active">{props.user.displayName}</span>
+                    </li>
+                    {props.user.displayName === 'Guest' ?
+                        ''
+                        :
                         <li className="nav-item">
                             <span id="logoutLink" className="nav-link active" onClick={handleSignOut}>Logout</span>
                         </li>
-                    </ul>
-                </div>
+                    }
+
+                </ul>
+            </div>
         </nav>
     )
 }
