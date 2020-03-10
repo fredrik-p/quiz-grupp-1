@@ -1,6 +1,7 @@
 import React from 'react'
 import Questions from './Questions'
-import Answers from './Answers'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 class CreateQuiz extends React.Component {
     state = {
@@ -89,6 +90,26 @@ class CreateQuiz extends React.Component {
         })
     }
     
+    handleAddQuestion = () => {
+        const newQuestions = [ {
+                        
+            questionTitle: '',
+            points: 0,
+            isMultipleQuestions: false,
+            id: '',
+            answers: [
+                {
+                    answerTitle: '',
+                    isTrue: false,
+                }
+            ]
+        }, ...this.state.quiz.questions]
+        this.setState({
+            quiz: {...this.state.quiz, questions: newQuestions}
+        })
+
+    }
+
     render() {
         const allQuestions = this.state.quiz.questions.map((question, i) => {
             return  <Questions 
@@ -117,9 +138,23 @@ class CreateQuiz extends React.Component {
 						className="form-control"
 						onChange={this.handleQuizTitleChange}
 						value={this.state.quizTitle}/>
-
                     </div>
-                   {allQuestions}
+                    
+                    <div 
+                    className="d-flex justify-content-end align-self-center" 
+                    id="addQuestion"
+                    >
+                    Next question 
+
+                    <span 
+                    onClick={this.handleAddQuestion} 
+                    className="ml-2">
+                    <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addQuestionIcon"
+                    />
+                    </span>
+                    </div>
+
+                    {allQuestions}
 
                     {/* <Answers
                         handleDeleteAnswer={this.handleDeleteAnswer}
@@ -127,6 +162,8 @@ class CreateQuiz extends React.Component {
                         answers={this.state.answers}
                        
                     /> */}
+
+                   
                 </form>
 
         )

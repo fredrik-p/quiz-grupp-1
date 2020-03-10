@@ -3,26 +3,95 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons'
 import Answers from './Answers'
 
-class Questions extends React.Component {
-    
-    handleQuestionTitleChange = (e) => {
-        this.props.handleQuestionTitleChange(this.props.question, e.target.value)
+const styles = {
+    inputNormal:{color:'black'},
+    inputClicked:{color:'lightGrey'}
     }
 
-    handlePointsChange = (e) => {
-        this.props.handlePointsChange(this.props.question, e.target.value)
+class Questions extends React.Component {
+    state = {
+        questionTitle: '',
+        points: 0,
+        isMultipleQuestions: false,
+        id: '',
+        answers: [
+            {
+                answerTitle: '',
+                isTrue: false,
+            }
+        ]
+    }
+
+    handleInputChange = (e) => {
+		this.setState({
+            [e.target.id]: e.target.value,
+        })
+    }
+
+    handleClick = () => {
+        this.setState({
+            answers: [...this.state.answers,
+                {
+                    answerTitle: '',
+                    isTrue: false,
+                }
+            ]
+
+        })
+    }
+    handleDeleteAnswer = (payload) => {
+        const newAnswers = [...this.state.answers]
+        const filteredAnswers = newAnswers.filter(answer => answer !== payload)
+    
+        this.setState({
+           answers: filteredAnswers,
+       })
+    }
+
+    handleAnswerChange = (value, payload) => {
+        const newAnswers = [...this.state.answers]
+        const newAnswer = newAnswers.find(answer => answer === payload)
+        newAnswer.answerTitle = value
+
+        this.setState({
+            answers: newAnswers,
+        })
+    }
+
+    handleIsTrue = (id) => {
+        const newAnswers = [...this.state.answers]
+        const newAnswer = newAnswers.find(answer => answer === id)
+        newAnswer.isTrue = !newAnswer.isTrue
+
+        this.setState({
+            answers: newAnswers,
+        })
+
+        const filteredAnswers = newAnswers.filter(answer => answer.isTrue === true)
+        if (filteredAnswers.length > 1) {
+            this.setState({
+                isMultipleQuestions: true
+            }) 
+        } else if (filteredAnswers.length === 1) {
+            this.setState({
+                isMultipleQuestions: false
+            }) 
+        } else {
+            return;
+        }
     }
 
     render() {
-        
-       const answers = this.props.answers.map((answer, i) => {
+       const answers = this.state.answers.map((answer, i) => {
             return <Answers 
                     key={i}    
+                    answer={answer} 
+                    answers={this.state.answers} 
                     handleDeleteAnswer={this.handleDeleteAnswer}
                     handleAnswerChange={this.handleAnswerChange}
                     answerTitle={answer.answerTitle}
-                    answer={answer}   
-                    answers={this.props.answers}
+                    isTrue={answer.isTrue}
+                    handleIsTrue={this.handleIsTrue}
                 />
         })
         return (
@@ -33,8 +102,8 @@ class Questions extends React.Component {
                 aria-label="Question"
                 placeholder="Type in your question"
                 className="form-control mt-1 mb-1"
-                onChange={this.handleQuestionTitleChange}
-                value={this.props.questionTitle}/>
+                onChange={this.handleInputChange}
+                value={this.state.question}/>
 
                 <label htmlFor="points">Points</label>
                 <div className="input-group mb-3 w-25">
@@ -43,18 +112,20 @@ class Questions extends React.Component {
                     className="form-control" 
                     placeholder="Points" 
                     aria-label="Points" 
-                    onChange={this.handlePointsChange}
-                    value={this.props.points}
+                    onChange={this.handleInputChange}
+                    value={this.state.points}
                     />
                     <div className="input-group-append">
                         <span 
-                            className="input-group-text">
-                            <FontAwesomeIcon icon={faCheck}
-                            />
-                        </span>
-                        <span 
+                            style={this.state.isMultipleQuestions ? styles.inputNormal : styles.inputClicked}
                             className="input-group-text">
                             <FontAwesomeIcon icon={faCheckDouble} 
+                            />
+                        </span>
+                       <span 
+                            style={this.state.isMultipleQuestions ? styles.inputClicked : styles.inputNormal}
+                            className="input-group-text">
+                            <FontAwesomeIcon icon={faCheck}
                             />
                         </span>
                         </div>

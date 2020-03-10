@@ -191,3 +191,11 @@ body {
 #isTrue {
     box-shadow: $button-shadow;
 }
+
+#addQuestionIcon {
+    color: white;
+}
+
+#addQuestionIcon:hover {
+    cursor: pointer;
+}
