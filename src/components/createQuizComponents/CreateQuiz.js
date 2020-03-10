@@ -92,11 +92,13 @@ class CreateQuiz extends React.Component {
     
     uploadQuiz = () => {
         const { quizTitle, questions } = this.state.quiz
+        //Add quiz title to a new doc in quizes collection
         db.collection('quizes').add({
             quizTitle: quizTitle
         })
             .then((docRef) => {
                 questions.forEach(question => {
+                    //add new documents to docId's subcollection for each question with answers
                     db.collection('quizes').doc(docRef.id).collection('questions').add({
                         questionTitle: question.questionTitle,
                         points: question.points,
