@@ -11,7 +11,7 @@ class CreateQuiz extends React.Component {
                     {
                         
                         questionTitle: '',
-                        points: 0,
+                        points: 1,
                         isMultipleQuestions: false,
                         id: '',
                         answers: [
@@ -32,38 +32,51 @@ class CreateQuiz extends React.Component {
 		this.setState({
             quiz: {
                 ...this.state.quiz, 
-                question: newQuestions
+                questions: newQuestions
             }
         })
     }
 
-    handleClick = () => {
+    handleAddAnswer = (payloadQuestion) => { 
+        const newQuestions = [...this.state.quiz.questions]
+        const foundQuestion = newQuestions.find(question => question === payloadQuestion)
+        foundQuestion.answers = [...foundQuestion.answers, {
+            answerTitle: '',
+            isTrue: false,
+        }]
         this.setState({
-            answers: [...this.state.answers,
-                {
-                    answerTitle: '',
-                    isTrue: false,
-                }
-            ]
+            quiz: {
+                ...this.state.quiz,
+                questions: newQuestions
+            }
 
         })
     }
-    handleDeleteAnswer = (payload) => {
-        const newAnswers = [...this.state.answers]
-        const filteredAnswers = newAnswers.filter(answer => answer !== payload)
+    handleDeleteAnswer = (payload, payloadQuestion) => {
+        const newQuestions = [...this.state.quiz.questions]
+        const foundQuestion = newQuestions.find(question => question === payloadQuestion)
+        const filteredAnswers = foundQuestion.answers.filter(answer => answer !== payload)
+        foundQuestion.answers = filteredAnswers;
     
         this.setState({
-           answers: filteredAnswers,
+            quiz: {
+                ...this.state.quiz,
+                questions: newQuestions
+            }
        })
     }
 
-    handleAnswerChange = (value, payload) => {
-        const newAnswers = [...this.state.answers]
-        const newAnswer = newAnswers.find(answer => answer === payload)
+    handleAnswerChange = (value, payload, payloadQuestion) => {
+        const newQuestions = [...this.state.quiz.questions]
+        const foundQuestion = newQuestions.find(question => question === payloadQuestion)
+        const newAnswer = foundQuestion.answers.find(answer => answer === payload)
         newAnswer.answerTitle = value
 
         this.setState({
-            answers: newAnswers,
+            quiz: {
+                ...this.state.quiz,
+                questions: newQuestions
+            }
         })
     }
     
@@ -81,6 +94,12 @@ class CreateQuiz extends React.Component {
     }
 
     handlePointsChange = (payload, value) => {
+        /**
+         * make sure there is a number and not a string
+         */
+        if(value !== +value || value < 0) {
+            return;
+        }
         const newQuestions = [...this.state.quiz.questions]
         const newQuestion = newQuestions.find(question => question === payload)
         newQuestion.points = value
@@ -90,6 +109,40 @@ class CreateQuiz extends React.Component {
         })
     }
     
+    handleIsTrue = (payload, questionPayload) => {
+        const newQuestions = [...this.state.quiz.questions];
+        const foundQuestion = newQuestions.find(question => question === questionPayload);
+        const foundAnswer = foundQuestion.answers.find(answer => answer === payload);
+        foundAnswer.isTrue = !foundAnswer.isTrue
+        
+    
+        this.setState({
+            quiz: {...this.state.quiz, questions: newQuestions}
+        })
+
+        this.handleIsMultipleQuestions(questionPayload);
+    }
+
+    handleIsMultipleQuestions = (payloadQuestion) => {
+        const newQuestions = [...this.state.quiz.questions];
+        const foundQuestion = newQuestions.find(question => question === payloadQuestion);
+
+        const allIsTrueAnswers = foundQuestion.answers.filter(answer => answer.isTrue === true)
+
+        if(allIsTrueAnswers.length > 1) {
+            foundQuestion.isMultipleQuestions = true
+        } else if ( allIsTrueAnswers.length === 1) {
+            foundQuestion.isMultipleQuestions = false
+        }
+
+        this.setState({
+            quiz: {
+                ...this.state.quiz,
+                questions: newQuestions
+            }
+        })
+    }
+
     uploadQuiz = () => {
         const { quizTitle, questions } = this.state.quiz
         //Add quiz title to a new doc in quizes collection
@@ -117,12 +170,15 @@ class CreateQuiz extends React.Component {
             return  <Questions 
                     key={i}
                     handleQuestionTitleChange={this.handleQuestionTitleChange}
-                    handleClick={this.handleClick}
+                    handleAddAnswer={this.handleAddAnswer}
                     answers={question.answers}
                     question={question}
                     questionTitle={question.questionTitle}
                     points={question.points}
                     handlePointsChange={this.handlePointsChange}
+                    handleAnswerChange={this.handleAnswerChange}
+                    handleDeleteAnswer={this.handleDeleteAnswer}
+                    handleIsTrue={this.handleIsTrue}
                     />
                 
         })
