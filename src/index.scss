@@ -36,15 +36,20 @@ body {
     font-family: $font;
     border-radius: $button-radius;
     box-shadow: $button-shadow;
+    border: none;
     
     
-
     a {
         color: $font-color;
         font-family: $font;
         text-decoration: none;
     }
 }
+
+.button:hover {
+    background-color: #FFA3A3;
+    transform: translateY(-7px);
+  }
 
 
 // ---- Navigation Component ----
@@ -172,6 +177,15 @@ body {
         color: $font-color;
         margin-bottom: 1.5rem;
     }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
+    }
     
 }
 
@@ -185,6 +199,7 @@ body {
     a:hover {
         color: $hover-color;
     }
+
 }
 
 #answerTitle {
@@ -237,9 +252,11 @@ body {
     margin-bottom: 2em;
 }
 
-#google {
-    background-image: (-120deg, #4285f4, #34a853, #fbbc05, #ea4335);
-    margin-right: 0.7em;
+.google {
+    width: 14%;
+    height: auto;
+    margin-right: 0.6em;
+    
 }
 
 .qg1-logo {
@@ -247,6 +264,15 @@ body {
     height: auto;
     display: block;
     margin: 3em auto 1em auto;
+}
+
+.google-btn {
+    width: 100%;
+    max-width: 295px;
+    padding: 0.5rem 1rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5;
 }
 
 #isTrue {

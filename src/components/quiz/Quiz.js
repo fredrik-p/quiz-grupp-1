@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import logo from '../assets/quizlogo.svg';
 
 function Quiz(props) {
     const quizListItems = props.quizState.map(quiz => {
         return (
             <li className="list-group" id="listStyle" key={quiz.id}>
-                <Link className="list-group-item list-group-item-action" key={quiz.id} to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
+                <Link key={quiz.id} to={'/quiz/' + quiz.id}>{quiz.quizTitle}</Link>
             </li>
         )
     })
@@ -16,7 +17,14 @@ function Quiz(props) {
             <ul className="list-group">
                 {quizListItems}
             </ul>
+
+            <div className="imgContainer">
+                <img src={logo} alt="Quiz logo" className="doQuizLogo" />
+            </div>
+
         </div>
+
+
     )
 }
 
