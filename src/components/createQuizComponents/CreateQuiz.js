@@ -66,6 +66,8 @@ class CreateQuiz extends React.Component {
                 questions: newQuestions
             }
        })
+
+       this.handleIsMultipleQuestions(payloadQuestion);
     }
 
     handleAnswerChange = (value, payload, payloadQuestion) => {
