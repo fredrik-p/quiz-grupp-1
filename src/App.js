@@ -46,6 +46,14 @@ class App extends React.Component {
 		})
 	}
 
+	signInAsGuest = () => {
+		this.setState({
+			user: {
+				displayName: 'Guest'
+			}
+		})
+	}
+
 	toggleCompleteQuiz = () => {
 		let toggledCompleted = this.state.quizCompleted
 		toggledCompleted = !toggledCompleted
