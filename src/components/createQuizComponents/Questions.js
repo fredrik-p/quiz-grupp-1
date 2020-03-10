@@ -55,6 +55,7 @@ class Questions extends React.Component {
                     {answers}
                     <button onClick={this.handleAddAnswer} 
                         className="btn btn-success"
+                        type="button"
                     >
                         Add answer
                     </button>
