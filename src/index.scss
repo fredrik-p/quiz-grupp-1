@@ -36,15 +36,20 @@ body {
     font-family: $font;
     border-radius: $button-radius;
     box-shadow: $button-shadow;
+    border: none;
     
     
-
     a {
         color: $font-color;
         font-family: $font;
         text-decoration: none;
     }
 }
+
+.button:hover {
+    background-color: #FFA3A3;
+    transform: translateY(-7px);
+  }
 
 
 // ---- Navigation Component ----
@@ -69,6 +74,62 @@ body {
     
     .questions {
         margin-bottom: 0.5rem;
+
+        text-align: center;
+
+        .doQuestionTitle{
+            background-color: $button-color;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            margin: 2.5rem 1rem 0 1rem;
+            padding: 1.5rem 1rem;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+        }
+        .quizAnswers{
+            list-style: none;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+
+            &.active {
+                color: $active-color
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    #nextQuestion {
+        font-size: 4rem;
+        color: $active-color;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .buttonContainer {
+        display: flex;
+        margin-top: 1rem;
+        height: 60px;
+        justify-content: center;
+
+        .button {
+            justify-self: center;
+        }
+    }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
     }
 
 }
@@ -101,6 +162,11 @@ body {
     }
 }
 
+.doQuizTitle {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
 #submitAnswerButton {
     margin-bottom: 0.5rem;
 }
@@ -110,6 +176,15 @@ body {
     h1 {
         color: $font-color;
         margin-bottom: 1.5rem;
+    }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
     }
     
 }
@@ -124,6 +199,7 @@ body {
     a:hover {
         color: $hover-color;
     }
+
 }
 
 #answerTitle {
@@ -176,9 +252,11 @@ body {
     margin-bottom: 2em;
 }
 
-#google {
-    background-image: (-120deg, #4285f4, #34a853, #fbbc05, #ea4335);
-    margin-right: 0.7em;
+.google {
+    width: 14%;
+    height: auto;
+    margin-right: 0.6em;
+    
 }
 
 .qg1-logo {
@@ -186,6 +264,15 @@ body {
     height: auto;
     display: block;
     margin: 3em auto 1em auto;
+}
+
+.google-btn {
+    width: 100%;
+    max-width: 295px;
+    padding: 0.5rem 1rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5;
 }
 
 #isTrue {

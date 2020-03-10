@@ -10,29 +10,34 @@ import CreateQuiz from './components/createQuizComponents/CreateQuiz'
 class App extends React.Component {
 	state = {
 		user: null,
-		quizCompleted: false
+		quizCompleted: false,
+		loading: true
 	}
 
 	componentDidMount() {
 		this.authLissener = auth.onAuthStateChanged(user => {
 			if (user) {
+				const endIndexOfName = user.displayName.indexOf(" ");
+				const firstName = user.displayName.slice(0, endIndexOfName);
 				this.setState({
 					user: {
 						email: user.email,
-						displayName: user.displayName
-					}
+						displayName: firstName
+					},
+					loading: false
 				})
 
 			} else {
 				this.setState({
-					user: null
+					user: null,
+					loading: false
 				})
 			}
 		})
 	}
 
 	componentWillUnmount() {
-		this.authLissener.unsubscribe();
+		this.authLissener();
 	}
 
 	login = () => {

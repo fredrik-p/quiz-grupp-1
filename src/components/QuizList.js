@@ -17,7 +17,7 @@ class QuizList extends React.Component {
     }
 
     componentWillUnmount() {
-        this.dbSnapshot.unsubscribe();
+        this.dbSnapshot();
     }
 
     //get quizzes from db
@@ -49,7 +49,7 @@ class QuizList extends React.Component {
                 <Route exact path="/">
 
 
-                    <div>
+                    <div className="container mt-4 text-center">
 
                         <button className="btn button btn-lg quizBtn">
                             <Link to="/create-quiz">Create New Quiz</Link>

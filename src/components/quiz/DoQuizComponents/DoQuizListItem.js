@@ -8,6 +8,6 @@ export default function DoQuizListItem(props) {
 
     const isToggled = props.answer.selected ? 'active' : '';
     return (
-        <li className={'list-group-item ' + isToggled} onClick={onAnswersClick} >{props.answer.answerTitle}</li>
+        <li className={'quizAnswers ' + isToggled} onClick={onAnswersClick} >{props.answer.answerTitle}</li>
     )
 }
