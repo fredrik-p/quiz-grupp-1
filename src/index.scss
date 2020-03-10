@@ -282,3 +282,14 @@ body {
     line-height: 1.5;
 }
 
+#isTrue {
+    box-shadow: $button-shadow;
+}
+
+#addQuestionIcon {
+    color: white;
+}
+
+#addQuestionIcon:hover {
+    cursor: pointer;
+}
