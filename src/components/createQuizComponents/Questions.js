@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCheckDouble, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import Answers from './Answers'
 
 class Questions extends React.Component {
@@ -42,7 +42,7 @@ class Questions extends React.Component {
                 value={this.props.questionTitle}/>
 
                 <label htmlFor="points">Points</label>
-                <div className="input-group mb-3 w-25">
+                <div className="input-group w-25">
                     <input type="number" 
                     id="points" 
                     className="form-control" 
@@ -53,12 +53,12 @@ class Questions extends React.Component {
                     />
                 </div>
                     {answers}
-                    <button onClick={this.handleAddAnswer} 
-                        className="btn btn-success"
-                        type="button"
-                    >
-                        Add answer
-                    </button>
+                    <div className="d-flex justify-content-start align-self-center" id="addAnswer">
+                        <span className="mr-2" onClick={this.handleAddAnswer}>
+                            <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addAnswerIcon"/>
+                            Add answer
+                        </span>
+                    </div>
             </div>
            
         )
