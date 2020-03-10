@@ -39,7 +39,7 @@ export default function DoQuizUI(props) {
 
                 {/* --- Render submit answers button if on last question --- */}
                 {(quizQuestionLength - 1) === index && selectedAnswer ?
-                    <button onClick={props.sendAnswers} className="btn button w-100" id="submitAnswerButton">Submit answers</button>
+                    <button onClick={props.sendAnswers} className="btn button btn-lg" id="submitAnswerButton">Submit</button>
                 :
                 ''
                 }
@@ -50,7 +50,7 @@ export default function DoQuizUI(props) {
                 :
                     '' 
             }
-            <div className="imgContainer">
+            <div className="imgContainer fixed-bottom mb-3">
                 <img src={logo} alt="Quiz logo" className="doQuizLogo" />
             </div>
         </div>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import Answers from './Answers'
 import { db } from '../../firebase/firebase'
+import SuccessScreen from './SuccessScreen'
 
 class CreateQuiz extends React.Component {
     state = {
@@ -328,43 +329,50 @@ class CreateQuiz extends React.Component {
 
         return (
             <div>
-                {this.state.errorMessage ? 
-                    <div className="alert alert-warning">{this.state.errorMessage}</div>
+                {this.state.uploadDone ? 
+                    <SuccessScreen />
                 :
-                    ''
-                }
-                <form onSubmit={this.handleFormSubmit} className="container">
-                    <button className="btn button btn-lg" type="submit" >
-                        I'M DONE!
-                    </button>
-                    <div className="form-group">
-                        <h1>Create Quiz</h1>
-                            <label htmlFor="quizTitle">Quiz Title</label>
-                            <input type="text"
-                            id="quizTitle"
-                            aria-label="Title of new quiz"
-                            placeholder="Type in your quiz title"
-                            className="form-control"
-                            onChange={this.handleQuizTitleChange}
-                            value={this.state.quizTitle}/>
-                    </div>
-                        
-                    <div 
-                        className="d-flex justify-content-end align-self-center" 
-                        id="addQuestion"
-                    >
-                        Next question 
 
-                        <span 
-                        onClick={this.handleAddQuestion} 
-                        className="ml-2">
-                        <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addQuestionIcon"
-                        />
-                        </span>
-                    </div>
+                <div>
+                    {this.state.errorMessage ? 
+                        <div className="alert alert-warning">{this.state.errorMessage}</div>
+                    :
+                        ''
+                    }
+                    <form onSubmit={this.handleFormSubmit} className="container">
+                        <button className="btn button btn-lg" type="submit" >
+                            I'M DONE!
+                        </button>
+                        <div className="form-group">
+                            <h1>Create Quiz</h1>
+                                <label htmlFor="quizTitle">Quiz Title</label>
+                                <input type="text"
+                                id="quizTitle"
+                                aria-label="Title of new quiz"
+                                placeholder="Type in your quiz title"
+                                className="form-control"
+                                onChange={this.handleQuizTitleChange}
+                                value={this.state.quizTitle}/>
+                        </div>
+                            
+                        <div 
+                            className="d-flex justify-content-end align-self-center" 
+                            id="addQuestion"
+                        >
+                            Next question 
 
-                    {allQuestions} 
-                </form>
+                            <span 
+                            onClick={this.handleAddQuestion} 
+                            className="ml-2">
+                            <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addQuestionIcon"
+                            />
+                            </span>
+                        </div>
+
+                        {allQuestions} 
+                    </form>
+                </div>
+            }
             </div>
 
         )
