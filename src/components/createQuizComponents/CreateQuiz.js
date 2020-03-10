@@ -128,6 +128,7 @@ class CreateQuiz extends React.Component {
         this.setState({
             quiz: {...this.state.quiz, questions: newQuestions}
         })
+    }
     handleIsTrue = (payload, questionPayload) => {
         const newQuestions = [...this.state.quiz.questions];
         const foundQuestion = newQuestions.find(question => question === questionPayload);
@@ -161,7 +162,7 @@ class CreateQuiz extends React.Component {
             }
         })
     }
-    }
+    
 
     uploadQuiz = () => {
         const { quizTitle, questions } = this.state.quiz
