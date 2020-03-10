@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import logo from '../assets/quizlogo.svg';
 
 function Quiz(props) {
     const quizListItems = props.quizState.map(quiz => {
@@ -16,7 +17,14 @@ function Quiz(props) {
             <ul className="list-group">
                 {quizListItems}
             </ul>
+
+            <div className="imgContainer">
+                <img src={logo} alt="Quiz logo" className="doQuizLogo" />
+            </div>
+
         </div>
+
+
     )
 }
 

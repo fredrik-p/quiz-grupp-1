@@ -178,6 +178,15 @@ body {
         color: $font-color;
         margin-bottom: 1.5rem;
     }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        img {
+            max-width: 40%;
+        }
+    }
     
 }
 
@@ -194,9 +203,6 @@ body {
 
 }
 
-<<<<<<< HEAD
-
-=======
 #answerTitle {
     background-color: #FFFA8D;
     border: none;
@@ -232,7 +238,6 @@ body {
 #minusCircle {
     color: black;
 }
->>>>>>> master
 // ---- LoginPage Component ----
 #login {
     h1, h2 {
@@ -262,13 +267,6 @@ body {
     margin: 3em auto 1em auto;
 }
 
-<<<<<<< HEAD
-.btn.my-btn {
-    width: auto;
-    overflow: auto;
-  }
-=======
 #isTrue {
     box-shadow: $button-shadow;
 }
->>>>>>> master
