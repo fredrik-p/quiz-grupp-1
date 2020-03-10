@@ -16,7 +16,7 @@ const LoginPage = (props) => {
                     src={google}
                     alt="Google logo" />Sign in with Google </button>
             <h2>OR</h2>
-            <button className="btn button btn-lg">
+            <button onClick={props.signInAsGuest} className="btn button btn-lg">
                 Play as a guest
             </button>
             <img className="qg1-logo"

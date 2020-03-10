@@ -8,6 +8,7 @@ $font: "Arial Black", Arial, Helvetica, sans-serif;
 $font-color: #000;
 $hover-color: #fff;
 $active-color: #FFFC8D;
+
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
@@ -83,6 +84,7 @@ body {
             font-size: 1.5rem;
             margin: 2.5rem 1rem 0 1rem;
             padding: 1.5rem 1rem;
+            
         }
 
         ul {
@@ -237,6 +239,11 @@ body {
 #minusCircle {
     color: #FFFA8D;
 }
+
+#isTrue {
+    box-shadow: $button-shadow;
+}
+
 // ---- LoginPage Component ----
 #login {
     h1, h2 {

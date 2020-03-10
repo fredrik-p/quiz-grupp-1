@@ -46,6 +46,14 @@ class App extends React.Component {
 		})
 	}
 
+	signInAsGuest = () => {
+		this.setState({
+			user: {
+				displayName: 'Guest'
+			}
+		})
+	}
+
 	toggleCompleteQuiz = () => {
 		let toggledCompleted = this.state.quizCompleted
 		toggledCompleted = !toggledCompleted
@@ -74,7 +82,7 @@ class App extends React.Component {
 							<Route
 								path='/'
 								exact
-								render={(props) => <LoginPage {...props} login={this.login} />}
+								render={(props) => <LoginPage {...props} login={this.login} signInAsGuest={this.signInAsGuest} />}
 							/>
 						}
 
