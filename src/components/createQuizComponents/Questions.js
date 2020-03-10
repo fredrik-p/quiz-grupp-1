@@ -10,19 +10,24 @@ class Questions extends React.Component {
     }
 
     handlePointsChange = (e) => {
-        this.props.handlePointsChange(this.props.question, e.target.value)
+        this.props.handlePointsChange(this.props.question, +e.target.value)
+    }
+
+    handleAddAnswer = () => {
+        this.props.handleAddAnswer(this.props.question)
     }
 
     render() {
-        
-       const answers = this.props.answers.map((answer, i) => {
+        const answers = this.props.answers.map((answer, i) => {
             return <Answers 
                     key={i}    
-                    handleDeleteAnswer={this.handleDeleteAnswer}
-                    handleAnswerChange={this.handleAnswerChange}
+                    handleDeleteAnswer={this.props.handleDeleteAnswer}
+                    handleAnswerChange={this.props.handleAnswerChange}
+                    handleIsTrue={this.props.handleIsTrue}
                     answerTitle={answer.answerTitle}
                     answer={answer}   
                     answers={this.props.answers}
+                    question={this.props.question}
                 />
         })
         return (
@@ -38,7 +43,7 @@ class Questions extends React.Component {
 
                 <label htmlFor="points">Points</label>
                 <div className="input-group mb-3 w-25">
-                    <input type="text" 
+                    <input type="number" 
                     id="points" 
                     className="form-control" 
                     placeholder="Points" 
@@ -46,26 +51,14 @@ class Questions extends React.Component {
                     onChange={this.handlePointsChange}
                     value={this.props.points}
                     />
-                    <div className="input-group-append">
-                        <span 
-                            className="input-group-text">
-                            <FontAwesomeIcon icon={faCheck}
-                            />
-                        </span>
-                        <span 
-                            className="input-group-text">
-                            <FontAwesomeIcon icon={faCheckDouble} 
-                            />
-                        </span>
-                        </div>
-                    </div>
-                    {answers}
-                    <button onClick={this.handleClick} type="submit" 
-                className="btn btn-success"
-                >
-                Add answer
-                </button>
                 </div>
+                    {answers}
+                    <button onClick={this.handleAddAnswer} 
+                        className="btn btn-success"
+                    >
+                        Add answer
+                    </button>
+            </div>
            
         )
     }

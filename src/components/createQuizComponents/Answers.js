@@ -8,23 +8,17 @@ const styles = {
     }
 
 class Answers extends React.Component {
-
-    handleInputChange = (e) => {
-		this.setState({
-            [e.target.id]: e.target.value,
-        })
-    }
     
     deleteAnswer = () => {
-        this.props.handleDeleteAnswer(this.props.answer)
+        this.props.handleDeleteAnswer(this.props.answer, this.props.question)
     }
 
     handleAnswerChange = (e) => {
-        this.props.handleAnswerChange(e.target.value, this.props.answer)
+        this.props.handleAnswerChange(e.target.value, this.props.answer, this.props.question)
     }
 
     handleIsTrue = () => {
-        this.props.handleIsTrue(this.props.answer)
+        this.props.handleIsTrue(this.props.answer, this.props.question)
     }
 
     render() {
@@ -58,7 +52,7 @@ class Answers extends React.Component {
                 </div>
                 <span 
                 id="isTrue" 
-                style={this.props.isTrue 
+                style={this.props.answer.isTrue 
                 ? 
                     styles.inputClicked 
                 : 
@@ -66,7 +60,7 @@ class Answers extends React.Component {
                 } 
                 onClick={this.handleIsTrue}
                 >
-                    {this.props.isTrue 
+                    {this.props.answer.isTrue 
                     ? 
                         <FontAwesomeIcon icon={faCheck} 
                         /> 
