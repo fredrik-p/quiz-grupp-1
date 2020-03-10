@@ -1,12 +1,9 @@
 import React from 'react'
 import Questions from './Questions'
-<<<<<<< HEAD
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-=======
 import Answers from './Answers'
 import { db } from '../../firebase/firebase'
->>>>>>> master
 
 class CreateQuiz extends React.Component {
     state = {
@@ -95,7 +92,6 @@ class CreateQuiz extends React.Component {
         })
     }
     
-<<<<<<< HEAD
     handleAddQuestion = () => {
         const newQuestions = [ {
                         
@@ -113,8 +109,8 @@ class CreateQuiz extends React.Component {
         this.setState({
             quiz: {...this.state.quiz, questions: newQuestions}
         })
+    }
 
-=======
     uploadQuiz = () => {
         const { quizTitle, questions } = this.state.quiz
         db.collection('quizes').add({
@@ -133,7 +129,6 @@ class CreateQuiz extends React.Component {
             }).catch( err => {
                 console.log('Add quiz error', err)
             })
->>>>>>> master
     }
 
     render() {
@@ -182,12 +177,7 @@ class CreateQuiz extends React.Component {
 
                     {allQuestions}
 
-                    {/* <Answers
-                        handleDeleteAnswer={this.handleDeleteAnswer}
-                        handleAnswerChange={this.handleAnswerChange}
-                        answers={this.state.answers}
-                       
-                    /> */}
+                    
 
                    
                 </form>
