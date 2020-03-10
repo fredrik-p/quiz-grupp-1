@@ -19,12 +19,18 @@ class CreateQuiz extends React.Component {
                         answers: [
                             {
                                 answerTitle: '',
+                                isTrue: true,
+                            },
+                            {
+                                answerTitle: '',
                                 isTrue: false,
                             }
                         ]
                     }
                 ]
-            } 
+            },
+            errorMessage: '',
+            uploadDone: false
         }
 
     handleQuestionTitleChange = (payload, value) => {
@@ -118,10 +124,14 @@ class CreateQuiz extends React.Component {
         const newQuestions = [ {
                         
             questionTitle: '',
-            points: 0,
+            points: 1,
             isMultipleQuestions: false,
             id: '',
             answers: [
+                {
+                    answerTitle: '',
+                    isTrue: true,
+                },
                 {
                     answerTitle: '',
                     isTrue: false,
@@ -166,8 +176,84 @@ class CreateQuiz extends React.Component {
         })
     }
     
+    checkQuiz = () => {
+        const newQuestions = [...this.state.quiz.questions]
+
+        //find if questionTitle is not empty and points is more then 0
+        const findPoints = newQuestions.find(question => question.points === 0);
+        const findQTitle = newQuestions.find(question => question.questionTitle === '');
+
+        
+        //find if answerTitle is empy
+        let oneTitleIsnotTrue = false;
+        newQuestions.forEach(question => {
+            const emptyAnswer = question.answers.find(answer => answer.answerTitle === '')
+            if(!oneTitleIsnotTrue && emptyAnswer) {
+                oneTitleIsnotTrue = true;
+            }
+            
+        } )
+        
+
+        //find if atleast one answer is true
+        let oneAnswerIsNotTrue = false;
+        newQuestions.forEach(question => {
+            const trueAnswer = question.answers.filter(answer => answer.isTrue === true)
+            if(!oneAnswerIsNotTrue && !trueAnswer.length) {
+                oneAnswerIsNotTrue = true
+            }
+        })
+
+        //return true if quiz is missing Quiz title
+        if(!this.state.quiz.quizTitle) {
+            this.setState({
+                errorMessage: 'Please fill out the Quiz Title field'
+            })
+            return true;
+        }
+        //return true if quiz is missing points or Question title
+        if(findPoints) {
+            this.setState({
+                errorMessage: 'A question needs to be worth more then 0 points'
+            })
+            return true;
+        }
+
+        if(findQTitle) {
+            this.setState({
+                errorMessage: 'Please fill out the Question Title field'
+            })
+            return true;
+        }
+        //return true if there is answers without atleast one true answer
+        if(oneAnswerIsNotTrue) {
+            this.setState({
+                errorMessage: 'Atleast one answer needs to be true'
+            })
+            return true;
+        }
+        //return true if there is a question without a title
+        if(oneTitleIsnotTrue) {
+            this.setState({
+                errorMessage: 'Every answer needs a title'
+            })
+            return true;
+        }
+
+        return false
+    }
 
     uploadQuiz = () => {
+
+        //check quiz 
+        if(this.checkQuiz()) {
+            console.log('Form not ok')
+            return;
+        }
+
+        this.setState({
+            errorMessage: ''
+        })
         const { quizTitle, questions } = this.state.quiz
         //Add quiz title to a new doc in quizes collection
         console.log('submit')
@@ -188,9 +274,37 @@ class CreateQuiz extends React.Component {
                     })
                 })
 
-                console.log('Done')
+                //clear input fields
+                this.setState({
+                    quiz: {
+                        quizTitle: '',   
+                        questions: [ 
+                                {
+                                    
+                                    questionTitle: '',
+                                    points: 1,
+                                    isMultipleQuestions: false,
+                                    id: '',
+                                    answers: [
+                                        {
+                                            answerTitle: '',
+                                            isTrue: true,
+                                        },
+                                        {
+                                            answerTitle: '',
+                                            isTrue: false,
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                    errorMessage: '',
+                    uploadDone: true
+                })
             }).catch( err => {
-                console.log('Add quiz error', err)
+                this.setState({
+                    errorMessage: err.errorMessage
+                })
             })
     }
 
@@ -213,38 +327,45 @@ class CreateQuiz extends React.Component {
         })
 
         return (
-            <form onSubmit={this.handleFormSubmit} className="container">
-                <button className="btn button btn-lg" type="submit" >
-                    I'M DONE!
-                </button>
-                <div className="form-group">
-                    <h1>Create Quiz</h1>
-                        <label htmlFor="quizTitle">Quiz Title</label>
-                        <input type="text"
-						id="quizTitle"
-						aria-label="Title of new quiz"
-						placeholder="Type in your quiz title"
-						className="form-control"
-						onChange={this.handleQuizTitleChange}
-						value={this.state.quizTitle}/>
+            <div>
+                {this.state.errorMessage ? 
+                    <div className="alert alert-warning">{this.state.errorMessage}</div>
+                :
+                    ''
+                }
+                <form onSubmit={this.handleFormSubmit} className="container">
+                    <button className="btn button btn-lg" type="submit" >
+                        I'M DONE!
+                    </button>
+                    <div className="form-group">
+                        <h1>Create Quiz</h1>
+                            <label htmlFor="quizTitle">Quiz Title</label>
+                            <input type="text"
+                            id="quizTitle"
+                            aria-label="Title of new quiz"
+                            placeholder="Type in your quiz title"
+                            className="form-control"
+                            onChange={this.handleQuizTitleChange}
+                            value={this.state.quizTitle}/>
                     </div>
-                    
+                        
                     <div 
-                    className="d-flex justify-content-end align-self-center" 
-                    id="addQuestion"
+                        className="d-flex justify-content-end align-self-center" 
+                        id="addQuestion"
                     >
-                    Next question 
+                        Next question 
 
-                    <span 
-                    onClick={this.handleAddQuestion} 
-                    className="ml-2">
-                    <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addQuestionIcon"
-                    />
-                    </span>
+                        <span 
+                        onClick={this.handleAddQuestion} 
+                        className="ml-2">
+                        <FontAwesomeIcon icon={faPlusCircle} size="2x" id="addQuestionIcon"
+                        />
+                        </span>
                     </div>
 
                     {allQuestions} 
                 </form>
+            </div>
 
         )
     }
