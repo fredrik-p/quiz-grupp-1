@@ -307,3 +307,23 @@ body {
 #addAnswer {
     line-height: 4rem;
 }
+
+
+// --- Success Component
+.successTitle {
+    font-size: 1.8rem;
+    margin-top: 4rem;
+}
+
+.successComp {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    
+    .button {
+        justify-self: center;
+    }
+}
+.successIMG {
+    max-width: 60%;
+}
