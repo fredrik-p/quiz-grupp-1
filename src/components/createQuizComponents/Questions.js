@@ -43,7 +43,9 @@ class Questions extends React.Component {
 
                 <label htmlFor="points">Points</label>
                 <div className="input-group w-25 mt-1 mb-3">
-                    <input type="number"
+                    <input 
+                        type="tel" 
+                        pattern="[0-9]*"
                         id="points"
                         className="form-control"
                         placeholder="Points"
