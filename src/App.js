@@ -49,7 +49,7 @@ class App extends React.Component {
 	handleLogin = () => {
 		this.setState({
 			user: null
-		})
+		});
 	}
 
 	signInAsGuest = () => {

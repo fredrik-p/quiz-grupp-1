@@ -10,6 +10,11 @@ const Navigation = props => {
                 props.history.push('/')
             })
     }
+
+    const handleLogin = () => {
+        props.handleLogin();
+        props.history.push('/');
+    }
     return (
         <nav id="navigation" className="navbar navbar-expand navbar-trans navbar-inverse">
             {props.quizCompleted ?
@@ -24,7 +29,7 @@ const Navigation = props => {
                     </li>
                     {props.user.displayName === 'Guest' ?
                             <li className="nav-item">
-                                <span id="logoutLink" className="nav-link active" onClick={props.handleLogin}>Login</span>
+                                <span id="logoutLink" className="nav-link active" onClick={handleLogin}>Login</span>
                             </li>
                         :
                             <li className="nav-item">
