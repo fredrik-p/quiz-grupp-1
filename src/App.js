@@ -66,28 +66,34 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<div className="App">
-					{this.state.user ? <Navigation user={this.state.user} quizCompleted={this.state.quizCompleted} /> : ''}
+					{this.state.loading ? 
+						<div className="spinner-border text-primary" role="status">
+                        	<span className="sr-only">Loading...</span>
+                    	</div>
+					:
+						<div>
+							{this.state.user ? <Navigation user={this.state.user} quizCompleted={this.state.quizCompleted} /> : ''}
+							<Switch>
+								<Route
+									path='/create-quiz'
+									render={(props) => <CreateQuiz {...props} />}
+								/>
+								{this.state.user ?
+									<Route
+										path='/'
+										render={(props) => <QuizList {...props} user={this.state.user} quizCompleted={this.state.quizCompleted} toggleCompleteQuiz={this.toggleCompleteQuiz} />}
+									/>
+									:
+									<Route
+										path='/'
+										exact
+										render={(props) => <LoginPage {...props} login={this.login} signInAsGuest={this.signInAsGuest} />}
+									/>
+								}
+							</Switch>
+						</div>
+					}
 
-					<Switch>
-						<Route
-							path='/create-quiz'
-							render={(props) => <CreateQuiz {...props} />}
-						/>
-						{this.state.user ?
-							<Route
-								path='/'
-								render={(props) => <QuizList {...props} user={this.state.user} quizCompleted={this.state.quizCompleted} toggleCompleteQuiz={this.toggleCompleteQuiz} />}
-							/>
-							:
-							<Route
-								path='/'
-								exact
-								render={(props) => <LoginPage {...props} login={this.login} signInAsGuest={this.signInAsGuest} />}
-							/>
-						}
-
-
-					</Switch>
 				</div>
 			</BrowserRouter>
 		);
