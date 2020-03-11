@@ -19,7 +19,7 @@ function Quiz(props) {
             </ul>
 
             <div className="imgContainer mb-3">
-                <img src={logo} alt="Quiz logo" className="doQuizLogo" />
+                <img src={logo} alt="Quiz logo" />
             </div>
 
         </div>

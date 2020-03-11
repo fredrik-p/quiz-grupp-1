@@ -75,7 +75,8 @@ body {
     
     .questions {
         margin-bottom: 0.5rem;
-
+        display: flex;
+        flex-direction: column;
         text-align: center;
 
         .doQuestionTitle{
@@ -84,6 +85,7 @@ body {
             font-size: 1.5rem;
             margin: 2.5rem 1rem 0 1rem;
             padding: 1.5rem 1rem;
+            align-self: center;
             
         }
 
@@ -130,7 +132,7 @@ body {
         justify-content: center;
         margin-top: 3rem;
         img {
-            max-width: 40%;
+            max-width: 65%;
         }
     }
 
@@ -185,13 +187,15 @@ body {
         justify-content: center;
         margin-top: 3rem;
         img {
-            max-width: 40%;
+            max-width: 65%;
         }
     }
     
 }
 
 #listStyle {
+
+    margin-bottom: 2rem;
     a {
         text-decoration: none;
 
@@ -326,4 +330,58 @@ body {
 }
 .successIMG {
     max-width: 60%;
+}
+
+// ---- Media Queries
+@media screen and (min-width: 700px) {
+
+    // ---- Quiz List ----
+    #quizStyle  {
+        .imgContainer {
+            img {
+                max-width: 45%;
+            }
+        }
+    }
+
+    // ---- Do Quiz ----
+    #doQuiz {
+        .imgContainer {
+            img {
+                max-width: 40%;
+            }
+        } 
+        
+    }
+
+    // ---- Create quiz success ----
+    .successIMG {
+        max-width: 55%;
+    }
+}
+@media screen and (min-width: 1200px) {
+
+    // ---- Quiz List ----
+    #quizStyle  {
+        .imgContainer {
+            img {
+                max-width: 45%;
+            }
+        }
+    }
+
+    // ---- Do Quiz ----
+    #doQuiz {
+        .imgContainer {
+            img {
+                max-width: 25%;
+            }
+        } 
+        
+    }
+
+     // ---- Create quiz success ----
+     .successIMG {
+        max-width: 55%;
+    }
 }
