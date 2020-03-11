@@ -11,7 +11,7 @@ const SuccessScreen = () => {
                     <Link to="/">GO BACK TO ALL QUIZES!</Link>
                 </button>
             </div>
-            <div className="successComp fixed-bottom">
+            <div className="successComp">
                 <img src={logo} alt="Quiz Logo" className="successIMG mb-3" />
             </div>
         </div>
