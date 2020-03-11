@@ -2,7 +2,6 @@ import React from 'react'
 import Questions from './Questions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import Answers from './Answers'
 import { db } from '../../firebase/firebase'
 import SuccessScreen from './SuccessScreen'
 
