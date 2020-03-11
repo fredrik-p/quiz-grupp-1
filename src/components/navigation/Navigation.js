@@ -23,11 +23,13 @@ const Navigation = props => {
                         <span className="nav-link active">{props.user.displayName}</span>
                     </li>
                     {props.user.displayName === 'Guest' ?
-                        ''
+                            <li className="nav-item">
+                                <span id="logoutLink" className="nav-link active" onClick={props.handleLogin}>Login</span>
+                            </li>
                         :
-                        <li className="nav-item">
-                            <span id="logoutLink" className="nav-link active" onClick={handleSignOut}>Logout</span>
-                        </li>
+                            <li className="nav-item">
+                                <span id="logoutLink" className="nav-link active" onClick={handleSignOut}>Logout</span>
+                            </li>
                     }
 
                 </ul>

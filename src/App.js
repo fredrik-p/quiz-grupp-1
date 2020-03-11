@@ -46,6 +46,12 @@ class App extends React.Component {
 		})
 	}
 
+	handleLogin = () => {
+		this.setState({
+			user: null
+		})
+	}
+
 	signInAsGuest = () => {
 		this.setState({
 			user: {
@@ -72,7 +78,14 @@ class App extends React.Component {
                     	</div>
 					:
 						<div>
-							{this.state.user ? <Navigation user={this.state.user} quizCompleted={this.state.quizCompleted} /> : ''}
+							{this.state.user ? <Navigation user={this.state.user} 
+								quizCompleted={this.state.quizCompleted} 
+								handleLogin={this.handleLogin} 
+
+							/> 
+							: 
+								''
+							}
 							<Switch>
 								<Route
 									path='/create-quiz'
