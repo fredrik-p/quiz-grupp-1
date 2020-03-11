@@ -155,6 +155,15 @@ class DoQuiz extends React.Component {
         })
     }
 
+    prevQuestion = () => {
+        if(this.state.currentQuestion === 0) {
+            return;
+        }
+        this.setState({
+            currentQuestion: this.state.currentQuestion - 1
+        })
+    }
+
     calculateAnswers = () => {
         const answers = this.state.quiz;
         let score = 0;
@@ -209,6 +218,8 @@ class DoQuiz extends React.Component {
                 sendAnswers={this.sendAnswers}
                 errorMessage={question.errorMessage}
                 nextQuestion={this.nextQuestion}
+                prevQuestion={this.prevQuestion}
+                curentQ={this.state.currentQuestion}
             />
                 )
         }) 

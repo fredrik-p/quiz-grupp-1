@@ -118,12 +118,19 @@ body {
 
     .buttonContainer {
         display: flex;
-        margin-top: 1rem;
+        flex-direction: column;
         height: 60px;
-        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 8rem;
+
+        .nextprev {
+            display: flex;
+            margin-bottom: 1.5rem;
+            justify-content: space-evenly;
+        }
 
         .button {
-            justify-self: center;
+            align-self: center;
         }
     }
 
