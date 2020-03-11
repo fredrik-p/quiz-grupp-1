@@ -4,13 +4,17 @@ $button-color: #FD8585;
 $primary: #FD8585;
 $button-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 $button-radius: 45px;
-$font: "Arial Black", Arial, Helvetica, sans-serif;
+$font: 'Oswald', sans-serif;
+$header-font: 'Luckiest Guy', cursive;
 $font-color: #000;
 $hover-color: #fff;
 $active-color: #FFFC8D;
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+// Import Fonts
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Oswald:wght@700&display=swap');
 
 /**
  * 1. Basic styles
@@ -27,7 +31,13 @@ $active-color: #FFFC8D;
 body {
 
     color: $font-color;
-    font-family: $font;
+	font-family: $font;
+
+	h1, h2, h3 {
+		font-family: $header-font;
+	}
+
+
 }
 .container {
     max-width: 800px;
@@ -88,7 +98,8 @@ body {
             font-size: 1.5rem;
             margin: 2.5rem 1rem 0 1rem;
             padding: 1.5rem 1rem;
-            align-self: center;
+			align-self: center;
+			font-family: 'Oswald';
             
         }
 
@@ -152,7 +163,7 @@ body {
     margin: 0.5rem 2.5rem;
 
     .scoreTitle {
-        font-size:  1.2rem;
+        font-size:  1.7rem;
         margin-top: 1.5rem;
         text-align: center;
     }
@@ -161,13 +172,13 @@ body {
         text-align: center;
         color: $active-color;
         margin-top: 1.5rem;
-        margin-bottom: 0;
+        margin-bottom: 1.5rem;
         font-size: 3.5rem;
         text-shadow: $button-shadow;
     }
 
     .logo {
-        max-width: 500px;
+        max-width: 80%;
     }
     div {
         display: flex;
@@ -341,13 +352,31 @@ body {
 }
 
 // ---- Media Queries
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 508px) and (max-width: 699px) {
+
+	 // ---- Quiz List ----
+	 #quizStyle  {
+        .imgContainer {
+            img {
+                max-width: 50%;
+            }
+        }
+	}
+	
+	 // ---- Score Screen ----
+	#scoreScreen{
+		max-width: 59%;
+			
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1199px) {
 
     // ---- Quiz List ----
     #quizStyle  {
         .imgContainer {
             img {
-                max-width: 45%;
+                max-width: 38%;
             }
         }
     }
@@ -365,6 +394,12 @@ body {
     // ---- Create quiz success ----
     .successIMG {
         max-width: 55%;
+	}
+	
+	// ---- Score Screen ----
+	#scoreScreen{
+		max-width: 35%;
+			
     }
 }
 @media screen and (min-width: 1200px) {
@@ -391,5 +426,11 @@ body {
      // ---- Create quiz success ----
      .successIMG {
         max-width: 55%;
+    }
+     // ---- Score Screen ----
+     
+	#scoreScreen{
+		max-width: 30%;
+			
     }
 }

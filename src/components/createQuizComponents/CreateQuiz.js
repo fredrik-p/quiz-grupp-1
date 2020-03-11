@@ -348,7 +348,7 @@ class CreateQuiz extends React.Component {
                             </div>
 
                             <div className="form-group">
-                                <h1>Create Quiz</h1>
+                                <h1>CREATE QUIZ</h1>
                                 <label htmlFor="quizTitle">Quiz Title</label>
                                 <input type="text"
                                     id="quizTitle"

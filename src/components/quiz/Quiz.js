@@ -13,7 +13,7 @@ function Quiz(props) {
     return (
 
         <div id="quizStyle" className="container mt-4 text-center">
-            <h1>Quizes</h1>
+            <h1>QUIZES</h1>
             <ul className="list-group">
                 {quizListItems}
             </ul>
