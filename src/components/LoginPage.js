@@ -21,7 +21,7 @@ const LoginPage = (props) => {
             </button>
             <img className="qg1-logo"
                 src={qg1logo}
-                alt="QG1 Logo" />
+                alt="QG1 Logo" fixed-bottom mb-3 />
         </div>
     );
 

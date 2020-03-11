@@ -17,7 +17,9 @@ $active-color: #FFFC8D;
  * 2. Navigation Component
  * 3. DoQuiz Component
  * 4. Quiz Component
+ * 5. Create Quiz Component
  * 5. LoginPage Component
+ * 6. Sucess Component
  */
 
 
@@ -62,7 +64,8 @@ body {
         }
     }
     #logoutLink:hover {
-        color: $hover-color
+		color: $hover-color;
+		cursor: pointer;
     }
 }
 
@@ -204,6 +207,7 @@ body {
 
 }
 
+// ---- Create Quiz Component ----
 #answerTitle {
     background-color: #FFFA8D;
     border: none;
@@ -240,8 +244,32 @@ body {
     color: #FFFA8D;
 }
 
+#addQuestionIcon {
+	cursor: pointer;
+    color :#E3CAF0;
+}
+
+#addQuestionIcon:hover {
+    cursor: pointer;
+    color: $hover-color;
+}
+
+#addAnswerIcon {
+	cursor: pointer;
+    color: #FFFA8D;
+}
+
+#addAnswerIcon:hover {
+    cursor: pointer;
+    color: $hover-color;
+}
+
+#addAnswer {
+    line-height: 4rem;
+}
+
 #isTrue {
-    box-shadow: $button-shadow;
+	cursor: pointer;
 }
 
 // ---- LoginPage Component ----
@@ -281,33 +309,6 @@ body {
     font-size: 1.25rem;
     line-height: 1.5;
 }
-
-#isTrue {
-    box-shadow: $button-shadow;
-}
-
-#addQuestionIcon {
-    color :#E3CAF0;
-}
-
-#addQuestionIcon:hover {
-    cursor: pointer;
-    color: $hover-color;
-}
-
-#addAnswerIcon {
-    color: #FFFA8D;
-}
-
-#addAnswerIcon:hover {
-    cursor: pointer;
-    color: $hover-color;
-}
-
-#addAnswer {
-    line-height: 4rem;
-}
-
 
 // --- Success Component
 .successTitle {

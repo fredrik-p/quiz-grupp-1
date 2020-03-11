@@ -341,9 +341,13 @@ class CreateQuiz extends React.Component {
                             ''
                         }
                         <form onSubmit={this.handleFormSubmit} className="container">
-                            <button className="btn button btn-lg" type="submit" >
-                                I'M DONE!
-                             </button>
+                            <div className="text-center mt-2 mb-4 ">
+                                <button className="btn button btn-lg"
+                                    type="submit" >
+                                    I'M DONE!
+                                </button>
+                            </div>
+
                             <div className="form-group">
                                 <h1>Create Quiz</h1>
                                 <label htmlFor="quizTitle">Quiz Title</label>
@@ -369,6 +373,7 @@ class CreateQuiz extends React.Component {
                             </div>
 
                             {allQuestions}
+
                         </form>
                     </div>
                 }
